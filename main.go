@@ -12,8 +12,8 @@ func main() {
 }
 func taskSelector() {
 	switch tools.TaskName() {
-	case "InsertMessage":
-		services.InsertMessage("worker:offer:message", "tmp")
+	case "MatchMessage":
+		services.InsertMessage("worker:match:message", "match_message")
 	default:
 		fmt.Println("Task doesn't exist.")
 	}
