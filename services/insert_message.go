@@ -1,8 +1,8 @@
 package services
 
 import (
-	"wayne.sdk/wayne/toolsgo/tools"
-	"wayne.sdk/wayne/toolsgo/tools/redis"
+	"github.com/WayneShenHH/toolsgo/tools"
+	"github.com/WayneShenHH/toolsgo/tools/redis"
 )
 
 func InsertMessage(key string, jsonfile string) {
