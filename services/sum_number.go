@@ -8,11 +8,11 @@ import (
 
 func Sum(numbers ...int) {
 	len := len(numbers)
-	tools.MultiStart(2, func() {
+	tools.MultiStartWithGroup(1000, func(i int) {
 		sum := 0
 		for _, v := range numbers[:len/2] {
 			sum += v
 		}
-		fmt.Println(sum)
+		fmt.Println(i, ":", sum)
 	})
 }
