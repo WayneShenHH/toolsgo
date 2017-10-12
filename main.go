@@ -17,8 +17,10 @@ func taskSelector() {
 		services.InsertMessage("worker:match:message", "match_ou")
 	case "OfferMessage":
 		services.InsertMessage("worker:offer:message", "offer_ou")
-	case "Sum":
-		services.Sum(1, 2, 3, 4, 5, 6)
+	case "GoroutineWithWaitGroup":
+		services.GoroutineWithWaitGroup()
+	case "GoroutineExample":
+		services.GoroutineExample()
 	default:
 		fmt.Println("Task doesn't exist.")
 	}
