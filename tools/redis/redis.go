@@ -28,3 +28,11 @@ func (r *Redis) Rpush(key string, value []byte) {
 		panic(err)
 	}
 }
+
+// Hset call redis Hset
+func (r *Redis) Hset(key string, field string, value []byte) {
+	_, err := r.Conn.Do("hset", key, field, value)
+	if err != nil {
+		panic(err)
+	}
+}

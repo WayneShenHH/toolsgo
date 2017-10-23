@@ -1,22 +1,52 @@
-[
-    {
-        "id": 1,
-        "title": "About Us",
-        "url": "/about-us"
-    },
-    {
-        "id": 2,
-        "title": "Team",
-        "url": "/team"
-    },
-    {
-        "id": 3,
-        "title": "Projects",
-        "url": "/projects"
-    },
-    {
-        "id": 4,
-        "title": "Hire Us",
-        "url": "/hire-us"
-    }
-]
+{
+  "last_updated": "",
+  "ts": 1508480084143,
+  "adpter_ts": 1508480200711,
+  "offer_ts": 1508480084143,
+  "source_type": "ju",
+  "offer": {
+    "Id": "",
+    "halves": "full",
+    "bid": 1,
+    "ot_id": 33,
+    "otname": "point",
+    "halves_type": "full",
+    "play_type": "point",
+    "head": 0,
+    "h_odd": 0.6,
+    "a_odd": 1.51,
+    "d_odd": 0,
+    "h_oppo": 0.6107055961070559,
+    "a_oppo": 0.38929440389294406,
+    "d_oppo": 0,
+    "is_running": false,
+    "push_id": "2888777_full_point_0.0_0",
+    "is_otb": false,
+    "is_asians": false,
+    "proportion": 0,
+    "last_updated": "",
+    "ts": 1508480084143,
+    "adpter_ts": 1508480200711,
+    "offer_ts": 1508480084143
+  },
+  "match": {
+    "id": 9,
+    "hteam_id": 36163,
+    "hteam": "Schalke 04",
+    "hteam_ch": "Schalke 04",
+    "ateam_id": 36586,
+    "ateam": "Mainz 05",
+    "ateam_ch": "FSV Mainz 05",
+    "start_date": "2017-10-20",
+    "start_ts": 1508526000000,
+    "start_time": "2017-10-20 18:30:00 UTC",
+    "group_id": 21805,
+    "group_name_ch": "FBGER Bundesliga \u003e Regular Season-17",
+    "category_id": 60,
+    "category_name": "FBGER",
+    "sport_id": 1,
+    "offer_id": null,
+    "tie_result": true,
+    "enable_asian_new": false
+  }
+}
