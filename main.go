@@ -25,6 +25,8 @@ func taskSelector() {
 		services.GoroutineWithWaitGroup()
 	case "GoroutineExample":
 		services.GoroutineExample()
+	case "ExampleAppend":
+		services.ExampleAppend()
 	default:
 		fmt.Println("Task doesn't exist.")
 	}

@@ -1,5 +1,5 @@
 SET @cid = (select id from categories where name = 'BANBA');
-SET @mid = (select id from matches where category_id = @cid and start_time > NOW() limit 1);
+SET @mid = (select id from matches where category_id = @cid and start_time > NOW() order by id desc limit 1);
 select 'match' as title, id, start_time as name from matches where id = @mid
 union
 (select 'category' as title,category_id as id,name from category_sources where source_id = 2 and category_id = @cid)
