@@ -2,12 +2,14 @@ package services
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/WayneShenHH/toolsgo/tools"
 )
 
 func GoroutineWithWaitGroup() {
-	tools.MultiStartWithGroup(1000, func(i int) {
+	tools.MultiStartWithGroup(5, func(i int) {
+		time.Sleep(2)
 		fmt.Println(i, ":goroutine")
 	})
 }

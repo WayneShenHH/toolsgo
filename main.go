@@ -25,6 +25,8 @@ func taskSelector() {
 		services.GoroutineWithWaitGroup()
 	case "GoroutineExample":
 		services.GoroutineExample()
+	case "CheckStatus":
+		services.CheckStatus()
 	case "ExampleAppend":
 		services.ExampleAppend()
 	default:

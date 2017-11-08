@@ -2,6 +2,7 @@ package tools
 
 import (
 	"fmt"
+	"runtime"
 	"sync"
 )
 
@@ -10,6 +11,8 @@ func MultiStartWithGroup(taskNumber int, job func(index int)) {
 	wg.Add(taskNumber)
 	for i := 0; i < taskNumber; i++ {
 		go func(i int) {
+			n := runtime.NumGoroutine()
+			fmt.Println("NumGoroutine =", n)
 			defer wg.Done()
 			job(i)
 		}(i)
