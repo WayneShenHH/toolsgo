@@ -15,7 +15,8 @@ func taskSelector() {
 	case "MatchMessage":
 		// services.InsertMessage("worker:match:message", "match_ml")
 		// services.InsertMessage("worker:match:message", "match_ou")
-		services.InsertMessage("worker:match:message", "tmp")
+		services.InsertMessage("worker:match:message", "match_point")
+		// services.InsertMessage("worker:match:message", "tmp")
 	case "OfferMessage":
 		// services.InsertMessage("worker:offer:message", "offer_ou")
 		services.InsertMessage("worker:offer:message", "tmp")
