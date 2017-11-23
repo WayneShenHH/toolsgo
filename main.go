@@ -30,6 +30,8 @@ func taskSelector() {
 		services.CheckStatus()
 	case "ExampleAppend":
 		services.ExampleAppend()
+	case "ExampleValid":
+		services.ExampleValid()
 	default:
 		fmt.Println("Task doesn't exist.")
 	}
