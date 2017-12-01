@@ -16,10 +16,9 @@ func taskSelector() {
 		// services.InsertMessage("worker:match:message", "match_ml")
 		// services.InsertMessage("worker:match:message", "match_ou")
 		services.InsertMessage("worker:match:message", "match_point")
-		// services.InsertMessage("worker:match:message", "tmp")
 	case "OfferMessage":
 		// services.InsertMessage("worker:offer:message", "offer_ou")
-		services.InsertMessage("worker:offer:message", "tmp")
+		services.InsertMessage("worker:offer:message", "offer_point")
 	case "SpiderOffer":
 		services.InsertSpiderOffer("2888802_ht_point_0.0_0", "spider_message")
 	case "GoroutineWithWaitGroup":
