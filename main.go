@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/WayneShenHH/toolsgo/services"
 	"github.com/WayneShenHH/toolsgo/tools"
@@ -31,6 +32,10 @@ func taskSelector() {
 		services.ExampleAppend()
 	case "ExampleValid":
 		services.ExampleValid()
+	case "CreateJuMatch":
+		mid := tools.CmdParameters()[0]
+		i, _ := strconv.Atoi(mid)
+		services.CreateJuMatch(uint(i))
 	default:
 		fmt.Println("Task doesn't exist.")
 	}

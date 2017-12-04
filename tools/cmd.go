@@ -11,3 +11,12 @@ func TaskName() string {
 	}
 	return args[0]
 }
+
+func CmdParameters() []string {
+	args := os.Args[1:]
+	if len(args) == 0 {
+		fmt.Println("There is no arg in command.")
+		return nil
+	}
+	return args[1:]
+}
