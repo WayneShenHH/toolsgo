@@ -10,6 +10,7 @@ type Repository interface {
 	GetUser(username string) (*entities.User, error)
 	UpdatesUser(id uint, fields *entities.User) error
 	GetUserByToken(token string) (*entities.User, error)
+	AddPlayTypeByStruct(playType *entities.PlayType) error
 	Hset(key string, field string, value []byte)
 	Rpush(key string, value []byte)
 }
