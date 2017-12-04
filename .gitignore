@@ -8,6 +8,7 @@ workers/variant_offers/debug
 swagger.json
 ./app/app.go
 launch.json
-libgo
+waynego
+toolsgo
 debug
 debug.test

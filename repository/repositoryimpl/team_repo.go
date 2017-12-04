@@ -1,6 +1,6 @@
 package repositoryimpl
 
-import "gitlab.cow.bet/bkd_tool/libgo/models/entities"
+import "github.com/WayneShenHH/toolsgo/models/entities"
 
 func (db *datastore) GetSourceTeamByStruct(filter entities.TeamSource) *entities.TeamSource {
 	t := &entities.TeamSource{}

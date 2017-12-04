@@ -1,7 +1,7 @@
 package repositoryimpl
 
 import (
-	"gitlab.cow.bet/bkd_tool/libgo/models/entities"
+	"github.com/WayneShenHH/toolsgo/models/entities"
 )
 
 func (db *datastore) GetMatchByID(id uint) *entities.Match {

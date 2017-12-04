@@ -1,6 +1,6 @@
 package repositoryimpl
 
-import "gitlab.cow.bet/bkd_tool/libgo/models/entities"
+import "github.com/WayneShenHH/toolsgo/models/entities"
 
 func (db *datastore) GetSourceCategoryByStruct(filter entities.CategorySource) *entities.CategorySource {
 	c := &entities.CategorySource{}

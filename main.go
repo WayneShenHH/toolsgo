@@ -4,12 +4,13 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/WayneShenHH/toolsgo/cmd"
 	"github.com/WayneShenHH/toolsgo/services"
 	"github.com/WayneShenHH/toolsgo/tools"
 )
 
 func main() {
-	taskSelector()
+	cmd.Execute()
 }
 func taskSelector() {
 	switch tools.TaskName() {

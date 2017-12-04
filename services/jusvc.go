@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/WayneShenHH/toolsgo/models"
+	"github.com/WayneShenHH/toolsgo/models/entities"
 	"github.com/WayneShenHH/toolsgo/tools"
-	"gitlab.cow.bet/bkd_tool/libgo/models"
-	"gitlab.cow.bet/bkd_tool/libgo/models/entities"
-	"gitlab.cow.bet/bkd_tool/libgo/shared/timezone"
+	"github.com/WayneShenHH/toolsgo/tools/timezone"
 )
 
 func CreateJuMatch(mid uint) {
