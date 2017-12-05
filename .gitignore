@@ -1,10 +1,4 @@
 vendor
-workers/log/log
-workers/log/debug
-workers/offers/offers
-workers/offers/debug
-workers/variant_offers/variant_offers
-workers/variant_offers/debug
 swagger.json
 ./app/app.go
 launch.json
@@ -12,3 +6,4 @@ waynego
 toolsgo
 debug
 debug.test
+toolsgo

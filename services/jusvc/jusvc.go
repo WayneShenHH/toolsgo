@@ -1,4 +1,4 @@
-package services
+package jusvc
 
 import (
 	"encoding/json"
@@ -7,13 +7,25 @@ import (
 
 	"github.com/WayneShenHH/toolsgo/models"
 	"github.com/WayneShenHH/toolsgo/models/entities"
+	"github.com/WayneShenHH/toolsgo/repository"
 	"github.com/WayneShenHH/toolsgo/tools"
 	"github.com/WayneShenHH/toolsgo/tools/timezone"
 )
 
-func CreateJuMatch(mid uint) {
+type JuService struct {
+	repository.Repository
+}
+
+// New instence JuService
+func New(ctx repository.Repository) *JuService {
+	return &JuService{
+		Repository: ctx,
+	}
+}
+
+func (service *JuService) CreateJuMatch(mid uint) {
 	var sid uint = 2
-	m := Repository().GetMatchByID(mid)
+	m := service.Repository.GetMatchByID(mid)
 	spid := m.SportID
 	h := entities.TeamSource{
 		SourceID: sid,
@@ -31,10 +43,10 @@ func CreateJuMatch(mid uint) {
 		SourceID:   sid,
 		CategoryID: m.CategoryID,
 	}
-	c2 := Repository().GetSourceCategoryByStruct(c)
-	g2 := Repository().GetSourceGroupByStruct(g)
-	h2 := Repository().GetSourceTeamByStruct(h)
-	a2 := Repository().GetSourceTeamByStruct(a)
+	c2 := service.Repository.GetSourceCategoryByStruct(c)
+	g2 := service.Repository.GetSourceGroupByStruct(g)
+	h2 := service.Repository.GetSourceTeamByStruct(h)
+	a2 := service.Repository.GetSourceTeamByStruct(a)
 	if c2.ID == 0 || g2.ID == 0 || h2.ID == 0 || a2.ID == 0 {
 		panic("data may not complete")
 	}
@@ -68,5 +80,5 @@ func CreateJuMatch(mid uint) {
 	}
 	tools.Log(message)
 	bytes, _ := json.Marshal(message)
-	Repository().Rpush("worker:match:message", bytes)
+	service.Repository.Rpush("worker:match:message", bytes)
 }

@@ -13,4 +13,5 @@ type Repository interface {
 	AddPlayTypeByStruct(playType *entities.PlayType) error
 	Hset(key string, field string, value []byte)
 	Rpush(key string, value []byte)
+	Blpop(key string) []byte
 }

@@ -26,7 +26,7 @@ func New() repository.Repository {
 		dbInstance = Connect()
 	}
 	r := redisConnext{}
-	r.Db = RedisConnect()
+	r.Db = redisConnect()
 	return &datastore{
 		mysql: dbInstance,
 		cache: &r,
@@ -50,14 +50,14 @@ func Connect() *gorm.DB {
 	return db
 }
 
-// RedisConnect 建立 Redis 連線
-func RedisConnect() redis.Conn {
+// redisConnect 建立 Redis 連線
+func redisConnect() redis.Conn {
 	config := app.Configuration()
 	c, err := redis.Dial("tcp", config.Redis)
 	if err != nil {
 		fmt.Println("連線失敗，1秒後重新連線。")
 		time.Sleep(1000 * time.Millisecond)
-		RedisConnect()
+		redisConnect()
 	}
 	return c
 }

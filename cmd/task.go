@@ -3,7 +3,8 @@ package cmd
 import (
 	"strconv"
 
-	"github.com/WayneShenHH/toolsgo/services"
+	"github.com/WayneShenHH/toolsgo/repository/repositoryimpl"
+	"github.com/WayneShenHH/toolsgo/services/jusvc"
 	"github.com/spf13/cobra"
 )
 
@@ -12,11 +13,17 @@ var msgCmd = &cobra.Command{
 	Long:  "insert msg cmd",
 	Use:   "msg",
 	Run: func(cmd *cobra.Command, args []string) {
+		repo := repositoryimpl.New()
+		ju := jusvc.New(repo)
 		switch args[0] {
 		case "match":
-			services.InsertMessage("worker:match:message", "match_point")
+			ju.InsertMessage("worker:match:message", "match_point")
 		case "offer":
-			services.InsertMessage("worker:offer:message", "offer_point")
+			ju.InsertMessage("worker:offer:message", "offer_point")
+		case "bp":
+			ju.InsertMessage("Broadcast:Player", "tmp")
+		case "bo":
+			ju.InsertMessage("Broadcast:Operator", "tmp")
 		}
 	},
 }
@@ -28,7 +35,9 @@ var juCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		mid := args[0]
 		i, _ := strconv.Atoi(mid)
-		services.CreateJuMatch(uint(i))
+		repo := repositoryimpl.New()
+		ju := jusvc.New(repo)
+		ju.CreateJuMatch(uint(i))
 	},
 }
 

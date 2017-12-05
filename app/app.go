@@ -14,6 +14,23 @@ func Env() string {
 	return env
 }
 
+var appkeys *Keys
+
+type Keys struct {
+	BroadcastPlayerChannel   string
+	BroadcastOperatorChannel string
+}
+
+func GetKeys() *Keys {
+	if appkeys == nil {
+		appkeys = &Keys{
+			BroadcastPlayerChannel:   "Broadcast:Player",
+			BroadcastOperatorChannel: "Broadcast:Operator",
+		}
+	}
+	return appkeys
+}
+
 // Configuration get config by env setting
 func Configuration() EnvironmentConfig {
 	env := Env()
@@ -46,8 +63,8 @@ func readConfig(env string) EnvironmentConfig {
 		}
 	case "production":
 		config = EnvironmentConfig{
-			Mysql: "ranbow_cc:A34sADkjS234FF8dfX23kS4jA8f@tcp(afu.cd75gda2paem.ap-northeast-1.rds.amazonaws.com:3306)/sbodds?charset=utf8&parseTime=true&loc=UTC&multiStatements=true",
-			Redis: "afu.ze67a8.0001.apne1.cache.amazonaws.com:6379",
+			Mysql: "root:123456@tcp(localhost:3306)/sbodds?charset=utf8&parseTime=true&loc=UTC&multiStatements=true",
+			Redis: ":6379",
 		}
 	}
 	return config

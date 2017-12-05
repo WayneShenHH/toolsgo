@@ -13,7 +13,6 @@ import (
 
 // Load loads the middlewares, routes, handlers.
 func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
-	// func Load(g *gin.Engine) *gin.Engine {
 	// Middlewares.
 	g.Use(gzip.Gzip(gzip.DefaultCompression))
 	g.Use(gin.Recovery())
@@ -31,7 +30,7 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 	loadPlayerRouter(g)
 	// loadAgentRouter(g)
 	// loadOperatorRouter(g)
-	// loadWebsocket(g)
+	loadWebsocket(g)
 
 	// The health check handlers
 	// for the service discovery.

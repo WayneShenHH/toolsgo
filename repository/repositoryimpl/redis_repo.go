@@ -15,3 +15,18 @@ func (db *datastore) Hset(key string, field string, value []byte) {
 		panic(err)
 	}
 }
+
+// Blpop call redis Blpop
+func (db *datastore) Blpop(key string) []byte {
+	inter, err := db.cache.Db.Do("blpop", key, 0)
+	if inter == nil {
+		return make([]byte, 0)
+	}
+	// BLPOP會回傳陣列第一組為key 第二組才是資料
+	message := inter.([]interface{})[1]
+	if err != nil {
+		panic(err)
+	}
+	bytes, _ := message.([]byte)
+	return bytes
+}

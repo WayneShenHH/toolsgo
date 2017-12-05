@@ -7,7 +7,7 @@ import (
 )
 
 func LoadJson(file string) []byte {
-	f, err := ioutil.ReadFile("./jsons/" + file + ".json")
+	f, err := ioutil.ReadFile("./assets/jsons/" + file + ".json")
 	if err != nil {
 		panic(err)
 	}
