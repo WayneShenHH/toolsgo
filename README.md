@@ -19,19 +19,19 @@
     
 1. nsqlookupd
 ```
-$ /usr/local/Cellar/nsq/1.0.0_1/bin/nsqlookupd
+$ /path-to-nsq-bin/nsqlookupd
 ```
 2. nsqd
 ```
-$ /usr/local/Cellar/nsq/1.0.0_1/bin/nsqd --lookupd-tcp-address=127.0.0.1:4160 --broadcast-address=127.0.0.1
+$ /path-to-nsq-bin/nsqd --lookupd-tcp-address=127.0.0.1:4160 --broadcast-address=127.0.0.1
 ```
 3. nsqadmin
 ```
-$ /usr/local/Cellar/nsq/1.0.0_1/bin/nsqadmin --lookupd-http-address=127.0.0.1:4161
+$ /path-to-nsq-bin/nsqadmin --lookupd-http-address=127.0.0.1:4161
 ```
 4. nsq_to_file
 ```
-$ /usr/local/Cellar/nsq/1.0.0_1/bin/nsq_to_file --topic=<topic-name> --output-dir=/tmp --lookupd-http-address=127.0.0.1:4161
+$ /path-to-nsq-bin/nsq_to_file --topic=<topic-name> --output-dir=/tmp --lookupd-http-address=127.0.0.1:4161
 ```
 
 
