@@ -9,6 +9,9 @@
 ### start nsq consuming worker
     $ ~/go/bin/waynego nsq <topic-name>
 
+### create ju match data & insert into redis
+    $ ~/go/bin/waynego ju <match_id>
+
 ### insert testing data to redis
     $ ~/go/bin/waynego msg match|offer|bp|bo
 
