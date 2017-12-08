@@ -1,3 +1,65 @@
+# Toolsgo
+## Commands:
+### reset database
+    $ ~/go/bin/waynego db:reset
+    
+### start http server
+    $ ~/go/bin/waynego server
+
+### start nsq consuming worker
+    $ ~/go/bin/waynego nsq <topic-name>
+
+### insert testing data to redis
+    $ ~/go/bin/waynego msg match|offer|bp|bo
+
+### add topics to nsqd
+    $ ~/go/bin/waynego nsq:topic name1,name2,...
+
+## start nsq services
+    
+1. nsqlookupd
+```
+$ /usr/local/Cellar/nsq/1.0.0_1/bin/nsqlookupd
+```
+2. nsqd
+```
+$ /usr/local/Cellar/nsq/1.0.0_1/bin/nsqd --lookupd-tcp-address=127.0.0.1:4160 --broadcast-address=127.0.0.1
+```
+3. nsqadmin
+```
+$ /usr/local/Cellar/nsq/1.0.0_1/bin/nsqadmin --lookupd-http-address=127.0.0.1:4161
+```
+4. nsq_to_file
+```
+$ /usr/local/Cellar/nsq/1.0.0_1/bin/nsq_to_file --topic=<topic-name> --output-dir=/tmp --lookupd-http-address=127.0.0.1:4161
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Wedding surprise
 ```
 鵑秀～

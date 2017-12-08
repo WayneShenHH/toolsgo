@@ -55,7 +55,6 @@ func NsqProduce(topic string, obj interface{}) error {
 }
 func NsqAddTopic(topics ...string) {
 	for _, topic := range topics {
-
 		post(NsqHttp+"/topic/create?topic="+topic, "")
 		post(NsqHttp+"/channel/create?topic="+topic+"&channel="+Channel, "")
 	}
@@ -74,7 +73,7 @@ func NsqConsume(topic string, task func(msg []byte)) {
 		task(message.Body)
 		return nil
 	}))
-	// err := nsqConsumer.ConnectToNSQLookupd(NsqLookupHttp)
+	// err := nsqConsumer[topic].ConnectToNSQLookupd(NsqLookupHttp)
 	err := nsqConsumer[topic].ConnectToNSQD(NsqTcp)
 	if err != nil {
 		tools.Log(err.Error())
