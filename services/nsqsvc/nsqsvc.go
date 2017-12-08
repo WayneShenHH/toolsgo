@@ -17,7 +17,7 @@ const (
 	NsqLookupTcp  = "127.0.0.1:4160" //:4160
 	NsqLookupHttp = "127.0.0.1:4161" //:4161 , consumer
 	Channel       = "ch_1"
-	topic         = "hello_nsq"
+	topic_all     = "comparer_msg,comparer_timer,offer_msg,offer_timer,spider_msg,spider_timer,broadcast_operator,broadcast_player"
 )
 
 var nsqdProducer map[string]*nsq.Producer
@@ -27,7 +27,7 @@ func NsqConsumeWorker(topic string) {
 	NsqConsume(topic, func(msg []byte) {
 		var m models.Message
 		json.Unmarshal(msg, &m)
-		tools.Log(m)
+		tools.Log(m, time.Now())
 	})
 	select {}
 }
@@ -53,10 +53,12 @@ func NsqProduce(topic string, obj interface{}) error {
 	e = nsqdProducer[topic].Publish(topic, body)
 	return e
 }
-func NsqAddTopic(topic string) {
-	base := "http://" + NsqHttp + "/"
-	post(base+"topic/create?topic="+topic, "")
-	post(base+"channel/create?topic="+topic+"&channel="+Channel, "")
+func NsqAddTopic(topics ...string) {
+	for _, topic := range topics {
+
+		post(NsqHttp+"/topic/create?topic="+topic, "")
+		post(NsqHttp+"/channel/create?topic="+topic+"&channel="+Channel, "")
+	}
 }
 func NsqConsume(topic string, task func(msg []byte)) {
 	if nsqConsumer == nil {
@@ -81,7 +83,7 @@ func NsqConsume(topic string, task func(msg []byte)) {
 func post(url string, obj interface{}) *http.Response {
 	body, _ := json.Marshal(obj)
 	reader := strings.NewReader(string(body))
-	request, _ := http.NewRequest("POST", url, reader)
+	request, _ := http.NewRequest("POST", "http://"+url, reader)
 	client := &http.Client{}
 	rsp, _ := client.Do(request)
 	return rsp

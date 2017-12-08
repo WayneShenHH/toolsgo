@@ -1,6 +1,9 @@
 package cmd
 
 import (
+	"strings"
+
+	"github.com/WayneShenHH/toolsgo/services"
 	"github.com/WayneShenHH/toolsgo/services/nsqsvc"
 	"github.com/spf13/cobra"
 )
@@ -11,6 +14,7 @@ var nsqCmd = &cobra.Command{
 	Use:   "nsq",
 	Run: func(cmd *cobra.Command, args []string) {
 		topic := args[0]
+		go services.CheckStatus()
 		nsqsvc.NsqConsumeWorker(topic)
 	},
 }
@@ -19,8 +23,8 @@ var nsqTopicCmd = &cobra.Command{
 	Long:  `nsq add topic`,
 	Use:   "nsq:topic",
 	Run: func(cmd *cobra.Command, args []string) {
-		topic := args[0]
-		nsqsvc.NsqAddTopic(topic)
+		topics := strings.Split(args[0], ",")
+		nsqsvc.NsqAddTopic(topics...)
 	},
 }
 var nsqProduceCmd = &cobra.Command{

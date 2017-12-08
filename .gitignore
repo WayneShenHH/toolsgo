@@ -2,8 +2,5 @@ vendor
 swagger.json
 ./app/app.go
 launch.json
-waynego
-toolsgo
 debug
 debug.test
-toolsgo
