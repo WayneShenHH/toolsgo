@@ -52,9 +52,9 @@ func (service *JuService) CreateJuMatch(mid uint) {
 	}
 	message := models.Message{
 		Match: models.SourceMatch{
-			ID:           mid,
+			ID:           0,
 			SportID:      spid,
-			StartTime:    m.StartTime.Format("2006-01-02 15:04:05 UTC"),
+			StartTime:    m.StartTime.Format("2006-01-02 15:04:05 +00:00"),
 			StartDate:    m.StartTime.Format("2006-01-02"),
 			StartTS:      timezone.TimeToStamp(m.StartTime),
 			HteamCH:      h2.Name,
