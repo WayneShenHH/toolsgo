@@ -27,6 +27,6 @@ SELECT @@global.time_zone, @@session.time_zone;
 
 select * from matches where category_id=(select id from categories where name='BANBA') 
 
-update users set access_token='6s6zXKlB7IGaqt5MLJzGs7xss81FjeYK45jUynRWnVk=' where username='tier1';
+update users set access_token='6s6zXKlB7IGaqt5MLJzGs7xss81FjeYK45jUynRWnVk=' where username='admin';
 
 show engine innodb status;
