@@ -17,9 +17,9 @@ var msgCmd = &cobra.Command{
 		ju := jusvc.New(repo)
 		switch args[0] {
 		case "match":
-			ju.InsertMessage("worker:match:message", "match_point")
+			ju.InsertMessage("worker:match:message", "msg_match")
 		case "offer":
-			ju.InsertMessage("worker:offer:message", "offer_point")
+			ju.InsertMessage("worker:offer:message", "msg_offer")
 		case "bp":
 			ju.InsertMessage("Broadcast:Player", "tmp")
 		case "bo":

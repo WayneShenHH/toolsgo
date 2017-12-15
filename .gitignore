@@ -5,3 +5,4 @@ launch.json
 debug
 debug.test
 toolsgo
+tmp.*
