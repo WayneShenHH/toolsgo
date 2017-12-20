@@ -1,25 +1,26 @@
-{
-    "adpter_ts": 1513245868717,
+[
+  {
+    "adpter_ts": 1513328253535,
     "match": {
       "ateam": null,
-      "ateam_ch": "Tianjin Golden Lions",
+      "ateam_ch": "Denver Nuggets",
       "ateam_id": 0,
       "away_player": "",
       "away_score": null,
       "category_id": 0,
-      "category_name": "Basketball||CHINA PROFESSIONAL BASKETBALL LEAGUE",
+      "category_name": "Basketball||NBA (REGULAR SEASON)",
       "group_id": 0,
-      "group_name_ch": "CHINA PROFESSIONAL BASKETBALL LEAGUE",
+      "group_name_ch": "NBA (REGULAR SEASON)",
       "home_player": "",
       "home_score": null,
       "hteam": null,
-      "hteam_ch": "Zhejiang Guangsha Lions",
+      "hteam_ch": "Detroit Pistons",
       "hteam_id": 0,
       "id": 0,
       "sport_id": 3,
-      "start_date": "2017-12-14",
-      "start_time": "2017-12-14 19:35:00 +00:00",
-      "start_ts": 1513280100,
+      "start_date": "2017-12-13",
+      "start_time": "2017-12-13 08:05:00 +00:00",
+      "start_ts": 1513152300,
       "will_be_running": false
     },
     "offer": {
@@ -31,17 +32,18 @@
       "h_odd": 0,
       "h_oppo": null,
       "halves": "full",
-      "head": -20.5,
+      "head": 208.5,
       "is_asians": false,
       "is_otb": true,
       "is_running": false,
       "ot_id": null,
-      "otname": "point",
-      "proportion": 0,
-      "push_id": "532427_full_point_-20.5_0",
+      "otname": "ou",
+      "proportion": null,
+      "push_id": "142409_full_ou_208.5_\u003cnil\u003e",
       "water_proportion": false
     },
-    "offer_ts": 1513245868173,
+    "offer_ts": 1513328194219,
     "source_type": "ju",
-    "ts": 1513245868667
+    "ts": 1513328253485
   }
+]

@@ -30,3 +30,8 @@ select * from matches where category_id=(select id from categories where name='B
 update users set access_token='6s6zXKlB7IGaqt5MLJzGs7xss81FjeYK45jUynRWnVk=' where username='admin';
 
 show engine innodb status;
+
+select * from match_set_offers where created_at > DATE_ADD(now(), INTERVAL -1 DAY);
+select * from match_sets where created_at > DATE_ADD(now(), INTERVAL -1 DAY);
+select * from matches where created_at > DATE_ADD(now(), INTERVAL -1 DAY);
+select * from odds where created_at > DATE_ADD(now(), INTERVAL -1 DAY);
