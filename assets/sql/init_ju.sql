@@ -19,9 +19,12 @@ truncate categories;
 truncate groups;
 truncate teams;
 
-delete from category_sources where source_id=2;
-delete from group_sources where source_id=2;
-delete from team_sources where source_id=2;
+delete from category_sources where source_id <> 1;
+delete from group_sources where source_id <> 1;
+delete from team_sources where source_id <> 1;
+select * from category_sources where source_id <> 1;
+select * from group_sources where source_id <> 1;
+select * from team_sources where source_id <> 1;
 
 SELECT @@global.time_zone, @@session.time_zone;
 
