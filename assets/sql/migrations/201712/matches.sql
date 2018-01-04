@@ -11,3 +11,5 @@ ALTER TABLE match_sources
 DROP INDEX idx_teams_start_time;
 ALTER TABLE match_sources
 ADD UNIQUE INDEX idx_teams_start_time (start_time,hteam_id,ateam_id,group_id);
+
+ALTER TABLE match_set_offers ADD is_allow_parlay TINYINT(1);

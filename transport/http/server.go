@@ -134,7 +134,7 @@ var ServerFlags = []cli.Flag{
 	cli.StringFlag{
 		EnvVar: "KITSVC_DATABASE_LOC",
 		Name:   "database-loc",
-		Usage:  "the timezone of the database.",
+		Usage:  "the timeutil of the database.",
 		Value:  "Local",
 	},
 	cli.BoolFlag{

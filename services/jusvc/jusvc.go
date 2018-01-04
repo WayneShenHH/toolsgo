@@ -9,7 +9,7 @@ import (
 	"github.com/WayneShenHH/toolsgo/models/entities"
 	"github.com/WayneShenHH/toolsgo/repository"
 	"github.com/WayneShenHH/toolsgo/tools"
-	"github.com/WayneShenHH/toolsgo/tools/timezone"
+	"github.com/WayneShenHH/toolsgo/tools/timeutil"
 )
 
 type JuService struct {
@@ -56,7 +56,7 @@ func (service *JuService) CreateJuMatch(mid uint) {
 			SportID:      spid,
 			StartTime:    m.StartTime.Format("2006-01-02 15:04:05 +00:00"),
 			StartDate:    m.StartTime.Format("2006-01-02"),
-			StartTS:      timezone.TimeToStamp(m.StartTime),
+			StartTS:      timeutil.TimeToStamp(m.StartTime),
 			HteamCH:      h2.Name,
 			AteamCH:      a2.Name,
 			GroupNameCh:  g2.Name,
@@ -72,9 +72,9 @@ func (service *JuService) CreateJuMatch(mid uint) {
 			Aodd:   1.02,
 		},
 		MessageTime: models.MessageTime{
-			Ts:       timezone.TimeToStamp(time.Now()),
-			AdpterTs: timezone.TimeToStamp(time.Now()),
-			OfferTs:  timezone.TimeToStamp(time.Now()),
+			Ts:       timeutil.TimeToStamp(time.Now()),
+			AdpterTs: timeutil.TimeToStamp(time.Now()),
+			OfferTs:  timeutil.TimeToStamp(time.Now()),
 		},
 		SourceType: "ju",
 	}

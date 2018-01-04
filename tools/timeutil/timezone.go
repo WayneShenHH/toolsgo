@@ -1,4 +1,4 @@
-package timezone
+package timeutil
 
 import (
 	"time"
@@ -7,8 +7,8 @@ import (
 )
 
 // FirstDayOfISOWeek get week day
-func FirstDayOfISOWeek(year int, week int, timezone *time.Location) time.Time {
-	date := time.Date(year, 0, 0, 0, 0, 0, 0, timezone)
+func FirstDayOfISOWeek(year int, week int, zone *time.Location) time.Time {
+	date := time.Date(year, 0, 0, 0, 0, 0, 0, zone)
 	isoYear, isoWeek := date.ISOWeek()
 
 	// iterate back to Monday
