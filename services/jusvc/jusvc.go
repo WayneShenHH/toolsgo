@@ -50,27 +50,20 @@ func (service *JuService) CreateJuMatch(mid uint) {
 	if c2.ID == 0 || g2.ID == 0 || h2.ID == 0 || a2.ID == 0 {
 		panic("data may not complete")
 	}
+	config := getMsgConfig(mid)
 	message := models.Message{
 		Match: models.SourceMatch{
 			ID:           0,
 			SportID:      spid,
-			StartTime:    m.StartTime.Format("2006-01-02 15:04:05 +00:00"),
-			StartDate:    m.StartTime.Format("2006-01-02"),
+			StartTime:    timeutil.TimeToString(m.StartTime),
+			StartDate:    timeutil.TimeToYMD(m.StartTime),
 			StartTS:      timeutil.TimeToStamp(m.StartTime),
 			HteamCH:      h2.Name,
 			AteamCH:      a2.Name,
 			GroupNameCh:  g2.Name,
 			CategoryName: c2.Name,
 		},
-		Offer: models.SourceOffer{
-			PushID: fmt.Sprint(mid, "_full_point_-1.0_999"),
-			Bid:    999,
-			OtName: "point",
-			Head:   -1.0,
-			Halves: "full",
-			Hodd:   0.77,
-			Aodd:   1.02,
-		},
+		Offer: config.Offer,
 		MessageTime: models.MessageTime{
 			Ts:       timeutil.TimeToStamp(time.Now()),
 			AdpterTs: timeutil.TimeToStamp(time.Now()),
@@ -81,4 +74,24 @@ func (service *JuService) CreateJuMatch(mid uint) {
 	tools.Log(message)
 	bytes, _ := json.Marshal(message)
 	service.Repository.Rpush("worker:match:message", bytes)
+}
+func getMsgConfig(mid uint) *models.Message {
+	bytes := tools.LoadJson("msg_setting")
+	msgSetting := &models.Message{}
+	json.Unmarshal(bytes, msgSetting)
+	if msgSetting.Offer.Bid == 0 {
+		msgSetting.Offer = models.SourceOffer{
+			Bid:        999,
+			OtName:     "point",
+			Head:       -1.0,
+			Proportion: 50,
+			Halves:     "full",
+			Hodd:       0.95,
+			Aodd:       0.95,
+			IsAsians:   true,
+		}
+	}
+	o := &msgSetting.Offer
+	msgSetting.Offer.PushID = fmt.Sprintf("%v_%v_%v_%v_%v", mid, o.Halves, o.OtName, o.Head, o.Bid)
+	return msgSetting
 }

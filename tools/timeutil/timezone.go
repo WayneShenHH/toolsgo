@@ -38,6 +38,12 @@ func TimeToString(t time.Time) string {
 	return t.In(loc).Format("2006-01-02 15:04:05 +00:00")
 }
 
+// TimeToYMD 時間轉YYYY-MM-DD，UTC
+func TimeToYMD(t time.Time) string {
+	loc, _ := time.LoadLocation("UTC")
+	return t.In(loc).Format("2006-01-02")
+}
+
 // TimeToStamp 時間轉 timestamp 統一做法
 func TimeToStamp(t time.Time) int64 {
 	return t.Unix() * 1000
@@ -57,7 +63,8 @@ func StringToTime(timeString string) time.Time {
 
 // TimeToDateString 時間轉MMDDHHmm，UTC
 func TimeToDateString(t time.Time) string {
-	return t.Format("01021504")
+	loc, _ := time.LoadLocation("UTC")
+	return t.In(loc).Format("01021504")
 }
 
 // JSONToUTCTime 將 json 格式的 time string convert to go time

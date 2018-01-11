@@ -1,0 +1,15 @@
+{
+    "offer": {
+      "bid": 999,
+      "halves": "full",
+      "otname": "point", 
+      "h_odd": 0.95,
+      "a_odd": 0.95,
+      "head": -2,
+      "proportion": 50,      
+      "is_asians": true,
+      "is_otb": false,
+      "is_running": false
+    },
+    "source_type": "ju"
+}
