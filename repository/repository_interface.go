@@ -14,4 +14,5 @@ type Repository interface {
 	Hset(key string, field string, value []byte)
 	Rpush(key string, value []byte)
 	Blpop(key string) []byte
+	LRange(key string, start int, end int) []interface{}
 }

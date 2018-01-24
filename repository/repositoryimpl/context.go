@@ -53,7 +53,7 @@ func Connect() *gorm.DB {
 // redisConnect 建立 Redis 連線
 func redisConnect() redis.Conn {
 	config := app.Configuration()
-	c, err := redis.Dial("tcp", config.Redis)
+	c, err := redis.Dial("tcp", config.Redis, redis.DialDatabase(config.RedisDatabaseIndex))
 	if err != nil {
 		fmt.Println("連線失敗，1秒後重新連線。")
 		time.Sleep(1000 * time.Millisecond)

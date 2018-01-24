@@ -24,6 +24,8 @@ var msgCmd = &cobra.Command{
 			ju.InsertMessage("Broadcast:Player", "tmp")
 		case "bo":
 			ju.InsertMessage("Broadcast:Operator", "tmp")
+		case "variant":
+			ju.InsertMessage("worker:variant:message", "variant")
 		}
 	},
 }

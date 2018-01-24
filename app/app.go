@@ -44,8 +44,9 @@ func Configuration() EnvironmentConfig {
 
 // EnvironmentConfig config model of env
 type EnvironmentConfig struct {
-	Mysql string
-	Redis string
+	Mysql              string
+	Redis              string
+	RedisDatabaseIndex int
 }
 
 func readConfig(env string) EnvironmentConfig {
@@ -53,18 +54,21 @@ func readConfig(env string) EnvironmentConfig {
 	switch env {
 	case "development":
 		config = EnvironmentConfig{
-			Mysql: "root:123456@tcp(localhost:3306)/sbodds?charset=utf8&parseTime=true&loc=UTC&multiStatements=true",
-			Redis: ":6379",
+			Mysql:              "root:123456@tcp(localhost:3306)/sbodds?charset=utf8&parseTime=true&loc=UTC&multiStatements=true",
+			Redis:              ":6379",
+			RedisDatabaseIndex: 0,
 		}
 	case "test":
 		config = EnvironmentConfig{
-			Mysql: "root:123456@tcp(localhost:3306)/sbodds?charset=utf8&parseTime=true&loc=UTC&multiStatements=true",
-			Redis: ":6379",
+			Mysql:              "root:123456@tcp(localhost:3306)/sbodds?charset=utf8&parseTime=true&loc=UTC&multiStatements=true",
+			Redis:              ":6379",
+			RedisDatabaseIndex: 0,
 		}
 	case "production":
 		config = EnvironmentConfig{
-			Mysql: "root:123456@tcp(localhost:3306)/sbodds?charset=utf8&parseTime=true&loc=UTC&multiStatements=true",
-			Redis: ":6379",
+			Mysql:              "root:123456@tcp(localhost:3306)/sbodds?charset=utf8&parseTime=true&loc=UTC&multiStatements=true",
+			Redis:              ":6379",
+			RedisDatabaseIndex: 0,
 		}
 	}
 	return config

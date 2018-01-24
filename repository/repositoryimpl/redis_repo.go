@@ -30,3 +30,9 @@ func (db *datastore) Blpop(key string) []byte {
 	bytes, _ := message.([]byte)
 	return bytes
 }
+
+func (db *datastore) LRange(key string, start int, end int) []interface{} {
+	inter, _ := db.cache.Db.Do("LRANGE", key, start, end)
+	message := inter.([]interface{})
+	return message
+}

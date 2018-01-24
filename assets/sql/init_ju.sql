@@ -33,8 +33,16 @@ select * from matches where category_id=(select id from categories where name='B
 update users set access_token='6s6zXKlB7IGaqt5MLJzGs7xss81FjeYK45jUynRWnVk=' where username='admin';
 
 show engine innodb status;
+show status where `variable_name` = 'Threads_connected';
+show processlist;
 
 select * from match_set_offers where created_at > DATE_ADD(now(), INTERVAL -1 DAY);
 select * from match_sets where created_at > DATE_ADD(now(), INTERVAL -1 DAY);
 select * from matches where created_at > DATE_ADD(now(), INTERVAL -1 DAY);
 select * from odds where created_at > DATE_ADD(now(), INTERVAL -1 DAY);
+
+-- open bookmaker for tx
+select * from book_makers where ref_id
+in (83,126,282,285,327,365,539);
+update book_makers set available = 1 where name
+in ('PinnacleSports','Bet 365','Singbet','IBCBET','sbobet.com','188bet','Marathonbet');
