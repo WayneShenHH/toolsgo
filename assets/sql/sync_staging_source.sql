@@ -82,3 +82,5 @@ update group_sources s set s.group_id = (
     )
 )
 where s.source_id > 1 and s.group_id is null;
+-- set team_id from teams
+update team_sources s set s.team_id = (select id from teams t where t.leader_id = s.leader_id)

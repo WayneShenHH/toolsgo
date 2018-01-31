@@ -33,5 +33,8 @@ select m.id as mid,g.id as gid,m.group_id from matches m
 left join groups g on m.group_id = g.id
 where g.id is null
 order by m.id desc 
+-- check team
+select s.* from team_sources s left join teams t on s.team_id = t.id
+where s.team_id > 0 and t.id is null
 ----------------------------------------------
 GO_ENV=production go/bin/libgo tx:sync team

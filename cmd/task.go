@@ -42,8 +42,21 @@ var juCmd = &cobra.Command{
 		ju.CreateJuMatch(uint(i))
 	},
 }
+var txCmd = &cobra.Command{
+	Short: "tx cmd",
+	Long:  `create tx match`,
+	Use:   "tx",
+	Run: func(cmd *cobra.Command, args []string) {
+		mid := args[0]
+		i, _ := strconv.Atoi(mid)
+		repo := repositoryimpl.New()
+		ju := jusvc.New(repo)
+		ju.CreateTxMatch(uint(i))
+	},
+}
 
 func init() {
+	RootCmd.AddCommand(txCmd)
 	RootCmd.AddCommand(msgCmd)
 	RootCmd.AddCommand(juCmd)
 }

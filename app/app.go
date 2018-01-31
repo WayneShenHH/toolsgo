@@ -70,6 +70,13 @@ func readConfig(env string) EnvironmentConfig {
 			Redis:              ":6379",
 			RedisDatabaseIndex: 0,
 		}
+	case "remote":
+		config = EnvironmentConfig{
+			Mysql:              "root:123456@tcp(localhost:3306)/sbodds?charset=utf8&parseTime=true&loc=UTC&multiStatements=true",
+			Redis:              ":6979",
+			RedisDatabaseIndex: 1,
+		}
 	}
+
 	return config
 }
