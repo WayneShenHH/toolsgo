@@ -71,6 +71,7 @@ func (service *JuService) CreateJuMatch(mid uint) {
 		},
 		SourceType: "ju",
 	}
+	message.Offer.Bid = 999
 	tools.Log(message)
 	bytes, _ := json.Marshal(message)
 	service.Repository.Rpush("worker:match:message", bytes)
@@ -130,8 +131,8 @@ func (service *JuService) CreateTxMatch(mid uint) {
 			StartTime:  timeutil.TimeToString(m.StartTime),
 			StartDate:  timeutil.TimeToYMD(m.StartTime),
 			StartTS:    timeutil.TimeToStamp(m.StartTime),
-			HteamID:    2476,
-			AteamID:    2800,
+			HteamID:    h2.LeaderID,
+			AteamID:    a2.LeaderID,
 			GroupID:    g2.LeaderID,
 			CategoryID: c2.LeaderID,
 		},
