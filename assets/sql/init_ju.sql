@@ -46,3 +46,6 @@ select * from book_makers where ref_id
 in (83,126,282,285,327,365,539);
 update book_makers set available = 1 where name
 in ('PinnacleSports','Bet 365','Singbet','IBCBET','sbobet.com','188bet','Marathonbet');
+
+-- set auto_increment
+alter table ft_group_sources auto_increment = 57399

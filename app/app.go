@@ -54,25 +54,25 @@ func readConfig(env string) EnvironmentConfig {
 	switch env {
 	case "development":
 		config = EnvironmentConfig{
-			Mysql:              "root:123456@tcp(localhost:3306)/sbodds?charset=utf8&parseTime=true&loc=UTC&multiStatements=true",
+			Mysql:              "root:123456@tcp(localhost:3306)/ftodds?charset=utf8&parseTime=true&loc=UTC&multiStatements=true",
 			Redis:              ":6379",
 			RedisDatabaseIndex: 0,
 		}
 	case "test":
 		config = EnvironmentConfig{
-			Mysql:              "root:123456@tcp(localhost:3306)/sbodds?charset=utf8&parseTime=true&loc=UTC&multiStatements=true",
+			Mysql:              "root:123456@tcp(localhost:3306)/ftodds?charset=utf8&parseTime=true&loc=UTC&multiStatements=true",
 			Redis:              ":6379",
 			RedisDatabaseIndex: 0,
 		}
 	case "production":
 		config = EnvironmentConfig{
-			Mysql:              "root:123456@tcp(localhost:3306)/sbodds?charset=utf8&parseTime=true&loc=UTC&multiStatements=true",
+			Mysql:              "root:123456@tcp(localhost:3306)/ftodds?charset=utf8&parseTime=true&loc=UTC&multiStatements=true",
 			Redis:              ":6379",
 			RedisDatabaseIndex: 0,
 		}
 	case "remote":
 		config = EnvironmentConfig{
-			Mysql:              "root:123456@tcp(localhost:3306)/sbodds?charset=utf8&parseTime=true&loc=UTC&multiStatements=true",
+			Mysql:              "root:123456@tcp(localhost:3306)/ftodds?charset=utf8&parseTime=true&loc=UTC&multiStatements=true",
 			Redis:              ":6979",
 			RedisDatabaseIndex: 1,
 		}

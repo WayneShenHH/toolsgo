@@ -2,12 +2,11 @@
 truncate sbodds_staging.default_team_maps;
 truncate sbodds_staging.default_group_maps;
 truncate sbodds_staging.default_category_maps;
-
 -- remove old source data on staging
-delete from sbodds_staging.team_sources where source_id <> 1;
-delete from sbodds_staging.group_sources where source_id <> 1;
-delete from sbodds_staging.category_sources where source_id <> 1;
--- assign data
+delete from sbodds_staging.team_sources where source_id > 1;
+delete from sbodds_staging.group_sources where source_id > 1;
+delete from sbodds_staging.category_sources where source_id > 1;
+-- assign data from staging to production
 insert into default_team_maps select * from sbodds_staging.default_team_maps;
 insert into default_group_maps select * from sbodds_staging.default_group_maps;
 insert into default_category_maps select * from sbodds_staging.default_category_maps;
@@ -18,7 +17,7 @@ from sbodds.team_sources s
 join sbodds.sports sp on sp.id=s.sport_id
 join sbodds.teams t on t.id=s.team_id
 join sbodds.categories c on c.id=s.category_id
-where s.source_id <> 1 and s.team_id is not null;
+where s.source_id > 1 and s.team_id is not null;
 -- insert teams by team_sources
 insert ignore into teams (created_at, updated_at, name, sport_id, category_id)
 select now(),now(),s.name,s.sport_id,(select id from categories where name = s.master_group_name) as cid
@@ -49,7 +48,7 @@ select now(),now(),c.name,s.name,s.name_tw,sp.name,s.source_id
 from sbodds.category_sources s
 join sbodds.sports sp on sp.id=s.sport_id
 join sbodds.categories c on c.id=s.category_id
-where s.source_id <> 1 and s.category_id is not null;
+where s.source_id > 1 and s.category_id is not null;
 -- check category maps
 select s.id,s.name,tx.id,tx.name from category_sources s 
 join default_category_maps d on s.name = d.source_category_name
@@ -69,7 +68,7 @@ select now(),now(),g.name,s.name,s.name_tw,sp.name,s.source_id
 from sbodds.group_sources s
 join sbodds.sports sp on sp.id=s.sport_id
 join sbodds.groups g on s.group_id = g.id
-where s.source_id <> 1 and s.group_id is not null;
+where s.source_id > 1 and s.group_id is not null;
 -- check group maps
 select s.id,s.name,tx.id,tx.name from group_sources s 
 join default_group_maps d on s.name = d.source_group_name
