@@ -11,6 +11,7 @@ truncate match_sources;
 truncate match_sets;
 truncate match_set_offers;
 truncate odds;
+truncate book_maker_sequences;
 
 truncate team_sources;
 truncate category_sources;
@@ -35,6 +36,7 @@ update users set access_token='6s6zXKlB7IGaqt5MLJzGs7xss81FjeYK45jUynRWnVk=' whe
 show engine innodb status;
 show status where `variable_name` = 'Threads_connected';
 show processlist;
+select * from information_schema.innodb_trx
 
 select * from match_set_offers where created_at > DATE_ADD(now(), INTERVAL -1 DAY);
 select * from match_sets where created_at > DATE_ADD(now(), INTERVAL -1 DAY);

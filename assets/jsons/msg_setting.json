@@ -1,14 +1,14 @@
 {
     "offer": {
-      "bid": 126,
+      "bid": 83,
       "halves": "full",
       "otname": "point", 
       "h_odd": 0.94,
-      "a_odd": 0.96,
+      "a_odd": 0.99,
       "head": -2.5,
       "proportion": 25,      
       "is_asians": true,
       "is_otb": false,
-      "is_running": false
+      "is_running": true
     }
 }
