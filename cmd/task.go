@@ -2,9 +2,14 @@ package cmd
 
 import (
 	"strconv"
+	"time"
+
+	"github.com/WayneShenHH/toolsgo/tools"
+	"github.com/WayneShenHH/toolsgo/tools/timeutil"
 
 	"github.com/WayneShenHH/toolsgo/repository/repositoryimpl"
 	"github.com/WayneShenHH/toolsgo/services/jusvc"
+	"github.com/WayneShenHH/toolsgo/services/locksvc"
 	"github.com/spf13/cobra"
 )
 
@@ -54,9 +59,22 @@ var txCmd = &cobra.Command{
 		ju.CreateTxMatch(uint(i))
 	},
 }
+var timerCmd = &cobra.Command{
+	Short: "timer cmd",
+	Long:  `timer`,
+	Use:   "timer",
+	Run: func(cmd *cobra.Command, args []string) {
+		n := timeutil.TimeToString(time.Now())
+		tools.Log(n)
+		go locksvc.UsingLockJob("123", "manager")
+		go locksvc.UsingLockJob("123", "boss")
+		select {}
+	},
+}
 
 func init() {
 	RootCmd.AddCommand(txCmd)
 	RootCmd.AddCommand(msgCmd)
 	RootCmd.AddCommand(juCmd)
+	RootCmd.AddCommand(timerCmd)
 }

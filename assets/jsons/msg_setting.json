@@ -3,12 +3,12 @@
       "bid": 83,
       "halves": "full",
       "otname": "point", 
-      "h_odd": 0.94,
-      "a_odd": 0.99,
+      "h_odd": 0.86,
+      "a_odd": 0.97,
       "head": -2.5,
       "proportion": 25,      
-      "is_asians": true,
+      "is_asians": false,
       "is_otb": false,
-      "is_running": true
+      "is_running": false
     }
 }
