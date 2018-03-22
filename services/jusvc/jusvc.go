@@ -144,7 +144,20 @@ func (service *JuService) CreateTxMatch(mid uint) {
 		},
 		SourceType: "tx",
 	}
+	if message.Offer.Hodd != 0 {
+		message.Offer.Hodd++
+	}
+	if message.Offer.Aodd != 0 {
+		message.Offer.Aodd++
+	}
+	if message.Offer.Dodd != 0 {
+		message.Offer.Dodd++
+	}
 	tools.Log(message)
 	bytes, _ := json.Marshal(message)
 	service.Repository.Rpush("worker:match:message", bytes)
+}
+func (service *JuService) Clear() {
+	service.Repository.FlushDB()
+	service.Repository.ClearWorkerData()
 }

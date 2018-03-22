@@ -10,3 +10,11 @@ func (db *datastore) GetMatchByID(id uint) *entities.Match {
 	query.Find(m, id)
 	return m
 }
+func (db *datastore) ClearWorkerData() {
+	db.mysql.Exec(`truncate match_sets;
+		truncate match_set_offers;
+		truncate odds;
+		truncate book_maker_sequences;
+		truncate auto_available_messages;
+		update matches set available = 0, available_time = null;`)
+}

@@ -44,6 +44,9 @@ var juCmd = &cobra.Command{
 		i, _ := strconv.Atoi(mid)
 		repo := repositoryimpl.New()
 		ju := jusvc.New(repo)
+		if clearFlag {
+			ju.Clear()
+		}
 		ju.CreateJuMatch(uint(i))
 	},
 }
@@ -56,6 +59,9 @@ var txCmd = &cobra.Command{
 		i, _ := strconv.Atoi(mid)
 		repo := repositoryimpl.New()
 		ju := jusvc.New(repo)
+		if clearFlag {
+			ju.Clear()
+		}
 		ju.CreateTxMatch(uint(i))
 	},
 }
@@ -71,8 +77,11 @@ var timerCmd = &cobra.Command{
 		select {}
 	},
 }
+var clearFlag bool
 
 func init() {
+	txCmd.Flags().BoolVarP(&clearFlag, "clear", "c", false, "clear data")
+	juCmd.Flags().BoolVarP(&clearFlag, "clear", "c", false, "clear data")
 	RootCmd.AddCommand(txCmd)
 	RootCmd.AddCommand(msgCmd)
 	RootCmd.AddCommand(juCmd)

@@ -15,4 +15,6 @@ type Repository interface {
 	Rpush(key string, value []byte)
 	Blpop(key string) []byte
 	LRange(key string, start int, end int) []interface{}
+	FlushDB()
+	ClearWorkerData()
 }

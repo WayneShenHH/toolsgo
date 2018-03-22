@@ -7,12 +7,14 @@ truncate default_category_maps;
 
 truncate matches;
 truncate match_sources;
-
+-- init offer worker -------------
 truncate match_sets;
 truncate match_set_offers;
 truncate odds;
 truncate book_maker_sequences;
-
+truncate auto_available_messages;
+update matches set available = 0, available_time = null;
+----------------------------------
 truncate team_sources;
 truncate category_sources;
 truncate group_sources;

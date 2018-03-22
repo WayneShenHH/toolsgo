@@ -26,7 +26,6 @@ const (
 // LockerInstance get lock singleton
 func LockerInstance() *Locker {
 	if locker == nil {
-		fmt.Println("new lock")
 		locker = &Locker{v: make(map[string]bool)}
 	}
 	return locker
@@ -90,12 +89,14 @@ func (lock *Locker) Unlock(key string) {
 
 func UsingLockJob(key, worker string) {
 	for {
+		fmt.Println(worker, "apply authorization")
 		l := LockerInstance().LockWithTicker(key, 2)
 		if !l {
-			panic(worker + " faild")
+			fmt.Println(worker, "faild")
 			continue
 		}
-		fmt.Println(worker, "ok")
+		fmt.Println(worker, "doing job...")
+		time.Sleep(time.Second * 3)
 		LockerInstance().Unlock(key)
 	}
 }

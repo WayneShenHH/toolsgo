@@ -36,3 +36,6 @@ func (db *datastore) LRange(key string, start int, end int) []interface{} {
 	message := inter.([]interface{})
 	return message
 }
+func (db *datastore) FlushDB() {
+	db.cache.Db.Do("FLUSHDB")
+}

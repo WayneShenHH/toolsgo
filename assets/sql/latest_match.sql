@@ -64,3 +64,8 @@ and d.book_maker_id = 42
 and d.name = 'point'
 and d.is_running = 1 and is_parlay = 0
 order by ts
+-- check offer by game_index
+select g.set_id,g.is_running,g.is_parlay,m.play_type_id,m.selected_odds_id from game_index g join match_set_offers m on g.offer_id = m.id where 1
+#and g.is_parlay = 0
+and g.sport_id = 1 and m.selected_odds_id is not null 
+order by g.set_id,m.play_type_id
