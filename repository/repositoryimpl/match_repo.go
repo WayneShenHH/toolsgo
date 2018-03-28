@@ -16,5 +16,6 @@ func (db *datastore) ClearWorkerData() {
 		truncate odds;
 		truncate book_maker_sequences;
 		truncate auto_available_messages;
+		truncate offer_stats;
 		update matches set available = 0, available_time = null;`)
 }
