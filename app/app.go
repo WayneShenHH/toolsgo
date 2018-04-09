@@ -76,6 +76,12 @@ func readConfig(env string) EnvironmentConfig {
 			Redis:              ":6979",
 			RedisDatabaseIndex: 1,
 		}
+	case "staging":
+		config = EnvironmentConfig{
+			Mysql:              "ranbow_cc:KXx7*NX0EAxhP!CBR7#6@tcp(aurora-ftodds-staging.cd75gda2paem.ap-northeast-1.rds.amazonaws.com:3306)/ftodds_staging?charset=utf8&parseTime=true&loc=UTC&multiStatements=true",
+			Redis:              ":6979",
+			RedisDatabaseIndex: 1,
+		}
 	}
 
 	return config

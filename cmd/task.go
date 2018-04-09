@@ -2,14 +2,10 @@ package cmd
 
 import (
 	"strconv"
-	"time"
-
-	"github.com/WayneShenHH/toolsgo/tools"
-	"github.com/WayneShenHH/toolsgo/tools/timeutil"
 
 	"github.com/WayneShenHH/toolsgo/repository/repositoryimpl"
 	"github.com/WayneShenHH/toolsgo/services/jusvc"
-	"github.com/WayneShenHH/toolsgo/services/locksvc"
+	"github.com/WayneShenHH/toolsgo/services/txsvc"
 	"github.com/spf13/cobra"
 )
 
@@ -66,15 +62,15 @@ var txCmd = &cobra.Command{
 	},
 }
 var timerCmd = &cobra.Command{
-	Short: "timer cmd",
-	Long:  `timer`,
-	Use:   "timer",
+	Short: "cmd",
+	Long:  `tx message`,
+	Use:   "txmsg",
 	Run: func(cmd *cobra.Command, args []string) {
-		n := timeutil.TimeToString(time.Now())
-		tools.Log(n)
-		go locksvc.UsingLockJob("123", "manager")
-		go locksvc.UsingLockJob("123", "boss")
-		select {}
+		mid := args[0]
+		i, _ := strconv.Atoi(mid)
+		repo := repositoryimpl.New()
+		tx := txsvc.New(repo)
+		tx.GetTxMsg(uint(i))
 	},
 }
 var clearFlag bool

@@ -1,5 +1,7 @@
 package models
 
+import "time"
+
 type Message struct {
 	// OldMessage
 
@@ -44,24 +46,25 @@ type SourceMatch struct {
 type SourceOffer struct {
 	ID string `json:"Id"`
 	// MatchID uint    `json:"match_id"`
-	Halves     string  `json:"halves"`
-	Bid        uint    `json:"bid"`
-	OtID       uint    `json:"ot_id"`
-	OtName     string  `json:"otname"`
-	HalvesType string  `json:"halves_type"`
-	PlayType   string  `json:"play_type"`
-	Head       float64 `json:"head"`
-	Hodd       float64 `json:"h_odd"`
-	Aodd       float64 `json:"a_odd"`
-	Dodd       float64 `json:"d_odd"`
-	Hoppo      float64 `json:"h_oppo"`
-	Aoppo      float64 `json:"a_oppo"`
-	Doppo      float64 `json:"d_oppo"`
-	IsRunning  bool    `json:"is_running"`
-	PushID     string  `json:"push_id"`
-	IsOTB      bool    `json:"is_otb"`
-	IsAsians   bool    `json:"is_asians"`
-	Proportion int     `json:"proportion"`
+	Halves      string  `json:"halves"`
+	Bid         uint    `json:"bid"`
+	OtID        uint    `json:"ot_id"`
+	OtName      string  `json:"otname"`
+	HalvesType  string  `json:"halves_type"`
+	PlayType    string  `json:"play_type"`
+	Head        float64 `json:"head"`
+	Hodd        float64 `json:"h_odd"`
+	Aodd        float64 `json:"a_odd"`
+	Dodd        float64 `json:"d_odd"`
+	Hoppo       float64 `json:"h_oppo"`
+	Aoppo       float64 `json:"a_oppo"`
+	Doppo       float64 `json:"d_oppo"`
+	IsRunning   bool    `json:"is_running"`
+	PushID      string  `json:"push_id"`
+	IsOTB       bool    `json:"is_otb"`
+	IsAsians    bool    `json:"is_asians"`
+	Proportion  int     `json:"proportion"`
+	OfferLineID uint    `json:"offer_lineid"`
 	MessageTime
 }
 type MessageTime struct {
@@ -69,4 +72,20 @@ type MessageTime struct {
 	Ts          int64  `json:"ts"`
 	AdpterTs    int64  `json:"adpter_ts"`
 	OfferTs     int64  `json:"offer_ts"`
+}
+type TxMatch struct {
+	StartTime time.Time
+	SportID   uint
+	HomeID    uint
+	AwayID    uint
+}
+type TxMessage struct {
+	Match         string
+	OfferOt       string
+	OfferLineid   uint
+	BookmakerName string
+	Line          float64
+	HomeOdds      float64
+	AwayOdds      float64
+	OfferTs       time.Time
 }

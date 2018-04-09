@@ -1,6 +1,9 @@
 package repository
 
-import "github.com/WayneShenHH/toolsgo/models/entities"
+import (
+	"github.com/WayneShenHH/toolsgo/models"
+	"github.com/WayneShenHH/toolsgo/models/entities"
+)
 
 type Repository interface {
 	GetMatchByID(id uint) *entities.Match
@@ -17,4 +20,5 @@ type Repository interface {
 	LRange(key string, start int, end int) []interface{}
 	FlushDB()
 	ClearWorkerData()
+	TxMessage(mid uint) []models.TxMessage
 }
