@@ -21,7 +21,21 @@ var workerScheduleCmd = &cobra.Command{
 		svc.Start()
 	},
 }
+var clearOddsCmd = &cobra.Command{
+	Short: "Worker schedule",
+	Long:  "Schedured process",
+	Use:   "worker:clear",
+
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println(cmd.Short)
+		fmt.Println(cmd.Long)
+		repo := repositoryimpl.New()
+		svc := schedulesvc.New(repo)
+		svc.ClearDataTask()
+	},
+}
 
 func init() {
 	RootCmd.AddCommand(workerScheduleCmd)
+	RootCmd.AddCommand(clearOddsCmd)
 }

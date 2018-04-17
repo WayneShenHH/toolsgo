@@ -1,15 +1,25 @@
 {
+    "match": {
+        "match_state": null,
+        "state_string": "2ST72",
+        "home_score": null,
+        "away_score": null,
+        "HomeRedcard": null,
+        "AwayRedcard": "1",
+        "Gametime": null,
+        "Minute": "72"
+    },
     "offer": {
-      "bid": 83,
-      "halves": "full",
-      "otname": "point", 
-      "h_odd": 0.95,
-      "a_odd": 0.95,
-      "head": 0.0,
-      "proportion": 25,   
-      "offer_lineid": 1,   
-      "is_asians": false,
-      "is_otb": false,
-      "is_running": false
+        "bid": 83,
+        "halves": "full",
+        "otname": "point",
+        "h_odd": 0.7,
+        "a_odd": 1.2,
+        "head": -2.5,
+        "proportion": 0,
+        "offer_lineid": 1,
+        "is_asians": false,
+        "is_otb": false,
+        "is_running": true
     }
 }

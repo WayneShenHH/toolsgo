@@ -20,7 +20,7 @@ where m.id = 225051
 -- query tx_adapter and checking origin data normal
 select m.hteam_name,m.ateam_name,m.offer_otid,m.offer_ot,
 m.bookmaker_name,m.cls,m.price_oh,m.price_oa,m.price_od,m.offer_inrunning,FROM_UNIXTIME(m.offer_ts/1000) as offer_ts 
-from messages m where 1
+from price_updates m where 1
 and hteam_id = 1724 
 and ateam_id = 3236 
 and match_time = UNIX_TIMESTAMP('2018-03-08 01:00:00') * 1000
@@ -49,19 +49,19 @@ group by d.name,d.origin_line,d.book_maker_id
 )
 order by d.name,d.origin_line,d.offer_ts
 -- check each odds on a specific match
-select d.leader_id,d.id,d.is_book_maker_flat,d.is_running,d.name,d.origin_line,d.origin_home_odds,d.origin_away_odds,b.name,FROM_UNIXTIME(d.offer_ts/1000) as offer_ts
+select d.leader_id,d.id,d.offer_line_id,d.is_running,d.name,d.origin_line,d.origin_home_odds,d.origin_away_odds,b.name,FROM_UNIXTIME(d.offer_ts/1000) as offer_ts
 from odds d
 join book_makers b on b.id = d.book_maker_id
 where 1
-and d.match_leader_id = 232272 
+and d.match_id = 232272 
 and d.is_parlay = 0
 and d.is_asians = 0
 and is_running = 1
-and d.book_maker_id = 42
-and d.origin_line = 218.5
+#and d.book_maker_id = 42
+#and d.origin_line = 218.5
 order by 
-d.name,d.book_maker_id,d.origin_line,
-d.offer_ts
+#d.name,d.origin_line,
+d.book_maker_id,d.offer_ts
 -- check offer
 select o.id,o.updated_at,o.match_set_id,p.code,
 	p.is_running,p.is_parlay,b.name,o.selected_odds_id,o.available,

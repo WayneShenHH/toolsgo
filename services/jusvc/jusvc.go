@@ -153,6 +153,16 @@ func (service *JuService) CreateTxMatch(mid uint) {
 	if message.Offer.Dodd != 0 {
 		message.Offer.Dodd++
 	}
+	if message.Offer.IsRunning {
+		message.Match.MatchState = config.Match.MatchState
+		message.Match.StateString = config.Match.StateString
+		message.Match.HomeScore = config.Match.HomeScore
+		message.Match.AwayScore = config.Match.AwayScore
+		message.Match.HomeRedcard = config.Match.HomeRedcard
+		message.Match.AwayRedcard = config.Match.AwayRedcard
+		message.Match.Gametime = config.Match.Gametime
+		message.Match.Minute = config.Match.Minute
+	}
 	tools.Log(message)
 	bytes, _ := json.Marshal(message)
 	service.Repository.Rpush("worker:match:message", bytes)

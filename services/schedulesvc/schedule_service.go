@@ -36,3 +36,9 @@ func (service *CronService) timerSchedule(scheduler *cron.Cron) {
 		fmt.Println("[timer]running at", time.Now())
 	})
 }
+func (service *CronService) ClearDataTask() {
+	for {
+		<-time.After(time.Second * 1)
+		service.Repository.ClearOdds()
+	}
+}
