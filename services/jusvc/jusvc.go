@@ -161,7 +161,7 @@ func (service *JuService) CreateTxMatch(mid uint) {
 		message.Match.HomeRedcard = config.Match.HomeRedcard
 		message.Match.AwayRedcard = config.Match.AwayRedcard
 		message.Match.Gametime = config.Match.Gametime
-		message.Match.Minute = config.Match.Minute
+		message.Match.GameMinute = config.Match.GameMinute
 	}
 	tools.Log(message)
 	bytes, _ := json.Marshal(message)

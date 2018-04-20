@@ -1,6 +1,7 @@
 package timeutil
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/jinzhu/now"
@@ -101,4 +102,30 @@ func ReportWeek() (time.Time, time.Time) {
 func TimeToCST(t time.Time) time.Time {
 	loc, _ := time.LoadLocation("Asia/Taipei")
 	return t.In(loc)
+}
+
+// Timer struct for timer
+type Timer struct {
+	cnt *time.Time
+}
+
+// GetTimer get a new timer
+func GetTimer() *Timer {
+	now := time.Now()
+	return &Timer{
+		cnt: &now,
+	}
+}
+
+// Counting timer counting & reset
+func (t *Timer) Counting(taskName string) time.Duration {
+	duration := time.Since(*t.cnt)
+	fmt.Printf("[%v] used time : %v\n", taskName, duration.String())
+	t.Reset()
+	return duration
+}
+
+// Reset timer reset
+func (t *Timer) Reset() {
+	*t.cnt = time.Now()
 }

@@ -18,7 +18,7 @@ join team_sources h on h.team_id = m.hteam_id and h.leader_id <> 0
 join team_sources a on a.team_id = m.ateam_id and a.leader_id <> 0
 where m.id = 225051
 -- query tx_adapter and checking origin data normal
-select m.hteam_name,m.ateam_name,m.offer_otid,m.offer_ot,
+select m.home_score,m.hteam_name,m.ateam_name,m.offer_otid,m.offer_ot,
 m.bookmaker_name,m.cls,m.price_oh,m.price_oa,m.price_od,m.offer_inrunning,FROM_UNIXTIME(m.offer_ts/1000) as offer_ts 
 from price_updates m where 1
 and hteam_id = 1724 
@@ -73,3 +73,8 @@ join book_makers b on b.id=o.book_maker_id
 where o.match_set_id = 50445 and p.is_running=1;
 -- full running point
 select id from match_set_offers where match_set_id= (select id from match_sets where match_id = 410498 and set_type_id=1) and play_type_id = 3
+-- check match count 
+select hteam_name,ateam_name from price_updates where bookmaker_id = 282 
+and match_time >= UNIX_TIMESTAMP('2018-04-17 04:00:00') * 1000 
+and match_time <= UNIX_TIMESTAMP('2018-04-18 04:00:00') * 1000 
+group by hteam_name,ateam_name

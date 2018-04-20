@@ -42,15 +42,14 @@ type SourceMatch struct {
 	EnableAsianNew bool     `json:"enable_asian_new"`
 
 	//即時比分
-	MatchState  uint   `json:"MatchState,omitempty"` //1:First Half,2:running,3:Second Half
+	MatchState  string //1:First Half,2:running,3:Second Half
 	StateString string `json:"state_string"`
-	HomeScore   uint   `json:"home_score,omitempty"`
-	AwayScore   uint   `json:"away_score,omitempty"`
-	HomeRedcard uint   `json:"HomeRedcard,omitempty"`
-	AwayRedcard uint   `json:"AwayRedcard,omitempty"`
-	Gametime    uint   `json:"Gametime,omitempty"`
-	GameMinute  uint   //比賽不含中場休息＆暫停，開打的時間
-	Minute      string //tx 給的型別是字串，比對成功後轉入 GameMinute
+	HomeScore   string `json:"home_score"`
+	AwayScore   string `json:"away_score"`
+	HomeRedcard string
+	AwayRedcard string
+	Gametime    string
+	GameMinute  string //比賽不含中場休息＆暫停，開打的時間
 }
 
 // SourceOffer 資料來源的 Offer

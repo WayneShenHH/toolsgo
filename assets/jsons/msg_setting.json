@@ -2,18 +2,18 @@
     "match": {
         "match_state": null,
         "state_string": "2ST72",
-        "home_score": null,
-        "away_score": null,
+        "home_score": "2",
+        "away_score": "3",
         "HomeRedcard": null,
         "AwayRedcard": "1",
         "Gametime": null,
         "Minute": "72"
     },
     "offer": {
-        "bid": 83,
+        "bid": 282,
         "halves": "full",
         "otname": "point",
-        "h_odd": 0.7,
+        "h_odd": 0.8,
         "a_odd": 1.2,
         "head": -2.5,
         "proportion": 0,

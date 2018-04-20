@@ -54,3 +54,12 @@ in ('PinnacleSports','Bet 365','Singbet','IBCBET','sbobet.com','188bet','Maratho
 
 -- set auto_increment
 alter table ft_group_sources auto_increment = 57399
+
+-- delete user betting data
+select p.id from orders o 
+join order_items i on o.id = i.order_id
+join order_item_profiles p on i.id = p.order_item_id
+where o.user_id = 48
+delete from orders where user_id = 48;
+delete from order_items where id in (523,524,525,657,658,659,660,663,664,665);
+delete from order_item_profiles where id in (523,524,525,657,658,659,660,663,664,665);

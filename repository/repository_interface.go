@@ -22,4 +22,6 @@ type Repository interface {
 	ClearOdds()
 	ClearWorkerData()
 	TxMessage(mid uint) []models.TxMessage
+	GetOldData() *[]models.OfferHierarchy
+	ClearOldData(msoid, msid []uint)
 }

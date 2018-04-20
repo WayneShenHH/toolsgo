@@ -4,7 +4,10 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/WayneShenHH/toolsgo/models"
 	"github.com/WayneShenHH/toolsgo/repository"
+	"github.com/WayneShenHH/toolsgo/tools"
+	"github.com/WayneShenHH/toolsgo/tools/timeutil"
 	"github.com/robfig/cron"
 )
 
@@ -37,8 +40,36 @@ func (service *CronService) timerSchedule(scheduler *cron.Cron) {
 	})
 }
 func (service *CronService) ClearDataTask() {
+	i := 1
 	for {
-		<-time.After(time.Second * 1)
-		service.Repository.ClearOdds()
+		fmt.Print(i, " -> ")
+		list := service.Repository.GetOldData()
+		mso, ms, _ := MergeID(*list)
+		cnt := timeutil.GetTimer()
+		if len(mso) > 0 {
+			service.Repository.ClearOldData(mso, ms)
+			cnt.Counting("ClearDataTask")
+		} else {
+			fmt.Println("[ClearDataTask] No data, sleep 10 seconds.")
+			time.Sleep(time.Second * 10)
+		}
+		i++
 	}
+}
+
+// MergeID OfferHierarchy into id lists
+func MergeID(list []models.OfferHierarchy) ([]uint, []uint, []uint) {
+	mso, ms, m := []uint{}, []uint{}, []uint{}
+	for _, v := range list {
+		if v.MatchSetOfferID > 0 {
+			mso = tools.UniAppend(mso, v.MatchSetOfferID)
+		}
+		if v.MatchSetID > 0 {
+			ms = tools.UniAppend(ms, v.MatchSetID)
+		}
+		if v.MatchID > 0 {
+			m = tools.UniAppend(m, v.MatchID)
+		}
+	}
+	return mso, ms, m
 }
