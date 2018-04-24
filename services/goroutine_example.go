@@ -7,6 +7,7 @@ import (
 	"github.com/WayneShenHH/toolsgo/tools"
 )
 
+// GoroutineWithWaitGroup example for goroutine with wait group
 func GoroutineWithWaitGroup() {
 	tools.MultiStartWithGroup(5, func(i int) {
 		time.Sleep(2)
@@ -14,6 +15,7 @@ func GoroutineWithWaitGroup() {
 	})
 }
 
+// GoroutineExample example for goroutine
 func GoroutineExample() {
 	// Suppose we have a function call `f(s)`. Here's how
 	// we'd call that in the usual way, running it

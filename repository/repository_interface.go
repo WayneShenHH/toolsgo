@@ -5,6 +5,7 @@ import (
 	"github.com/WayneShenHH/toolsgo/models/entities"
 )
 
+// Repository interface for dao
 type Repository interface {
 	GetMatchByID(id uint) *entities.Match
 	GetSourceCategoryByStruct(filter entities.CategorySource) *entities.CategorySource

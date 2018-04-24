@@ -16,11 +16,13 @@ func Env() string {
 
 var appkeys *Keys
 
+// Keys redis keys
 type Keys struct {
 	BroadcastPlayerChannel   string
 	BroadcastOperatorChannel string
 }
 
+// GetKeys init key
 func GetKeys() *Keys {
 	if appkeys == nil {
 		appkeys = &Keys{

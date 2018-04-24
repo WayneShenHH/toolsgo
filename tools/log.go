@@ -10,6 +10,7 @@ import (
 
 const isLogMode = true
 
+// Log print message
 func Log(o ...interface{}) {
 	if !isLogMode {
 		return

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	// import for pprof
 	_ "net/http/pprof"
 	"os"
 	"runtime"
@@ -14,6 +15,7 @@ import (
 var cpuprofile = flag.String("cpuprofile", "", "write cpu profile `file`")
 var memprofile = flag.String("memprofile", "", "write memory profile to `file`")
 
+// CheckStatus machine checking
 func CheckStatus() {
 	fmt.Println("Check cpu status from http://localhost:8001/debug/pprof/")
 	go http.ListenAndServe("0.0.0.0:8001", nil)

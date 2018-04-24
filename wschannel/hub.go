@@ -22,13 +22,18 @@ type SocketHub struct {
 	Register   chan *Client
 	Unregister chan *Client
 }
+
+// WSChannel ws channel enum
 type WSChannel int
 
 const (
+	// Operator channel
 	Operator WSChannel = iota
+	// Player channel
 	Player
 )
 
+// RegisterClient register
 func (manager *SocketHub) RegisterClient() {
 	go manager.addClient()
 }

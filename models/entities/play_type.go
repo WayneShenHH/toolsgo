@@ -2,6 +2,7 @@ package entities
 
 import "github.com/jinzhu/gorm"
 
+// PlayType play_types
 type PlayType struct {
 	gorm.Model
 	Name        string `sql:"default:null"`

@@ -2,6 +2,7 @@ package entities
 
 import "github.com/jinzhu/gorm"
 
+// TeamSource team_sources
 type TeamSource struct {
 	gorm.Model
 	Name            string `gorm:"index:idx_team_name;"`

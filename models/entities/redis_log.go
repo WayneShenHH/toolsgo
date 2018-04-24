@@ -2,6 +2,7 @@ package entities
 
 import "github.com/jinzhu/gorm"
 
+// LogMessage redis log message
 type LogMessage struct {
 	gorm.Model
 	Data         string  `json:"data"`

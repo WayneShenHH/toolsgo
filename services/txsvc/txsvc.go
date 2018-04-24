@@ -8,6 +8,7 @@ import (
 	"github.com/WayneShenHH/toolsgo/tools/timeutil"
 )
 
+// TxService for deal with tx data
 type TxService struct {
 	repository.Repository
 }
@@ -19,6 +20,7 @@ func New(ctx repository.Repository) *TxService {
 	}
 }
 
+// GetTxMsg get tx source data for a match
 func (service *TxService) GetTxMsg(mid uint) {
 	list := service.Repository.TxMessage(mid)
 	data := "match_id,offer_lineid,bookmaker,line,home_odds,away_odds,offer_ts\n"
@@ -36,6 +38,8 @@ func (service *TxService) GetTxMsg(mid uint) {
 	OutPutCsv(data)
 	fmt.Println("count:", len(list))
 }
+
+// OutPutCsv out put csv file
 func OutPutCsv(data string) {
 	path := "./result.csv"
 	os.Remove(path)

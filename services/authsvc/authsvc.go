@@ -22,6 +22,8 @@ func New(ctx repository.Repository) *AuthService {
 		Repository: ctx,
 	}
 }
+
+// Login service login
 func (service *AuthService) Login(model models.UserLogin) (models.UserLoginResult, error) {
 	var err error
 	var result models.UserLoginResult

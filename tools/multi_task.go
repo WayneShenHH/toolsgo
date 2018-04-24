@@ -6,6 +6,7 @@ import (
 	"sync"
 )
 
+// MultiStartWithGroup open multi-process by goroutine
 func MultiStartWithGroup(taskNumber int, job func(index int)) {
 	var wg sync.WaitGroup
 	wg.Add(taskNumber)

@@ -61,19 +61,20 @@ var txCmd = &cobra.Command{
 		ju.CreateTxMatch(uint(i))
 	},
 }
-var timerCmd = &cobra.Command{
+var txAdaptorCmd = &cobra.Command{
 	Short: "cmd",
 	Long:  `tx message`,
 	Use:   "txmsg",
 	Run: func(cmd *cobra.Command, args []string) {
-		mid := args[0]
-		i, _ := strconv.Atoi(mid)
 		repo := repositoryimpl.New()
 		tx := txsvc.New(repo)
-		tx.GetTxMsg(uint(i))
+		tx.GetTxMsg(matchID)
 	},
 }
-var clearFlag bool
+var (
+	clearFlag bool
+	matchID   uint
+)
 
 func init() {
 	txCmd.Flags().BoolVarP(&clearFlag, "clear", "c", false, "clear data")
@@ -81,5 +82,6 @@ func init() {
 	RootCmd.AddCommand(txCmd)
 	RootCmd.AddCommand(msgCmd)
 	RootCmd.AddCommand(juCmd)
-	RootCmd.AddCommand(timerCmd)
+	txAdaptorCmd.Flags().UintVarP(&matchID, "matchid", "m", 0, "find tx origin message")
+	RootCmd.AddCommand(txAdaptorCmd)
 }

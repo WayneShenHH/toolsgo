@@ -1,13 +1,14 @@
 {
     "match": {
+        "id":4193557,
         "match_state": null,
-        "state_string": "2ST72",
-        "home_score": "2",
-        "away_score": "3",
+        "state_string": null,
+        "home_score": null,
+        "away_score": null,
         "HomeRedcard": null,
-        "AwayRedcard": "1",
+        "AwayRedcard": null,
         "Gametime": null,
-        "Minute": "72"
+        "Minute": null
     },
     "offer": {
         "bid": 282,
@@ -20,6 +21,7 @@
         "offer_lineid": 1,
         "is_asians": false,
         "is_otb": false,
-        "is_running": true
-    }
+        "is_running": false
+    },
+    "offer_ts":1524280946390
 }

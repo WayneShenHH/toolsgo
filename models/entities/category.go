@@ -2,6 +2,7 @@ package entities
 
 import "github.com/jinzhu/gorm"
 
+//CategorySource category_sources
 type CategorySource struct {
 	gorm.Model
 	Name            string `gorm:"not null;index:idx_name;unique_index:idx_name_source_leader"`

@@ -13,9 +13,11 @@ import (
 	"strings"
 	"time"
 
+	"github.com/WayneShenHH/toolsgo/models"
 	"github.com/WayneShenHH/toolsgo/repository"
 )
 
+// MonitorService for daemon on linux
 type MonitorService struct {
 	repository.Repository
 }
@@ -38,9 +40,10 @@ var (
 )
 
 const (
-	offerSvc      = "libgo_comparer,libgo_matchstat,libgo_offer,libgo_variant"
-	envProduction = "production"
-	slackURL      = "https://hooks.slack.com/services/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"
+	offerSvc        = "libgo_comparer,libgo_matchstat,libgo_offer,libgo_variant"
+	envProduction   = "production"
+	slackURL        = "https://hooks.slack.com/services/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"
+	shutdownCounter = 3
 )
 
 // Start 開始process check
@@ -66,7 +69,7 @@ func checkProcess(worker string) {
 		msg = msg + fmt.Sprintf("Restart %v\n", worker)
 		alert(msg)
 		if env == envProduction {
-			go productionRestart(worker, 3)
+			productionRestart(worker, shutdownCounter)
 		}
 	} else {
 		log.Println(fmt.Sprintf("%v active", worker))
@@ -74,7 +77,7 @@ func checkProcess(worker string) {
 	}
 }
 func productionRestart(svc string, countdown int) {
-	if strings.Index(svc, offerSvc) < 0 {
+	if strings.Index(offerSvc, svc) < 0 {
 		return
 	}
 	time.Sleep(time.Second * 5)
@@ -83,7 +86,7 @@ func productionRestart(svc string, countdown int) {
 	}
 	countdown--
 	if countdown < 0 {
-		alertChannel(svc+" failed more than 3 times, close http:server.", "#libgo-offer")
+		alertChannel(fmt.Sprintf("%v failed more than %d times, close http:server.", svc, shutdownCounter), "#libgo-offer")
 		shutDownAPIServer()
 		return
 	}
@@ -110,17 +113,20 @@ func serviceStatus(svc string) string {
 	return msg
 }
 func shutDownAPIServer() {
-	cmd := exec.Command("sudo", "systemctl", "stop", "libgo_httpapi.service")
-	_, e := cmd.Output()
-	if e != nil || !serviceIsFailed("libgo_httpapi") {
+	workers := getWorker()
+	for _, w := range workers {
+		exec.Command("sudo", "systemctl", "stop", w+".service")
+	}
+	if !serviceIsFailed("libgo_httpapi") {
 		shutDownAPIServer()
 	}
+	panic("shut down APIServer")
 }
 func alert(msg string) {
 	alertChannel(msg, channel)
 }
 func alertChannel(msg string, ch string) {
-	payload := SlackPayload{
+	payload := models.SlackPayload{
 		Text:      msg,
 		Username:  machine,
 		Channel:   ch,
@@ -155,7 +161,9 @@ func valid(uas string) bool {
 	skip, _ := regexp.MatchString("(process_checker|sshd|syslog|service_monitor).service", uas) // 跳過自己 & 系統程序
 	return enable && !skip
 }
-func SendSlack(payload SlackPayload) {
+
+// SendSlack send a message to slack
+func SendSlack(payload models.SlackPayload) {
 	jsonStr, _ := json.Marshal(payload)
 	fmt.Println(string(jsonStr))
 	req, err := http.NewRequest("POST", slackURL, bytes.NewBuffer(jsonStr))
@@ -168,11 +176,4 @@ func SendSlack(payload SlackPayload) {
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Println("[response]", string(body))
-}
-
-type SlackPayload struct {
-	Text      string `json:"text"`
-	Channel   string `json:"channel"`
-	Username  string `json:"username"`
-	IconEmoji string `json:"icon_emoji"`
 }

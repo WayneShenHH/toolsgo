@@ -11,6 +11,7 @@ import (
 	"github.com/robfig/cron"
 )
 
+// CronService for schedule
 type CronService struct {
 	repository.Repository
 }
@@ -22,6 +23,7 @@ func New(ctx repository.Repository) *CronService {
 	}
 }
 
+// Start worker
 func (service *CronService) Start() {
 	scheduler := cron.New()
 	service.timerSchedule(scheduler)
@@ -39,6 +41,8 @@ func (service *CronService) timerSchedule(scheduler *cron.Cron) {
 		fmt.Println("[timer]running at", time.Now())
 	})
 }
+
+// ClearDataTask for clear old data
 func (service *CronService) ClearDataTask() {
 	i := 1
 	for {

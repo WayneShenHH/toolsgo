@@ -4,6 +4,7 @@ import (
 	"github.com/WayneShenHH/toolsgo/tools"
 )
 
+// ExampleAppend example for append slice without repeated node
 func ExampleAppend() {
 	ids := []interface{}{}
 	ids = tools.UniqueAppend(ids, 1)

@@ -2,6 +2,7 @@ package entities
 
 import "github.com/jinzhu/gorm"
 
+// GroupSource group_sources
 type GroupSource struct {
 	gorm.Model
 	Name            string `gorm:"index:idx_name;unique_index:idx_name_sport_source_leader"`

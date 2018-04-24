@@ -8,6 +8,7 @@ import (
 	"github.com/WayneShenHH/toolsgo/repository"
 )
 
+// LogService service for log
 type LogService struct {
 	repository.Repository
 }
@@ -19,6 +20,7 @@ func New(ctx repository.Repository) *LogService {
 	}
 }
 
+// Read log from redis
 func (service *LogService) Read(start int, end int) {
 	res := []entities.LogMessage{}
 	list := service.Repository.LRange("worker:offer:log", start, end)

@@ -87,6 +87,7 @@ func (lock *Locker) Unlock(key string) {
 	delete(lock.v, key)
 }
 
+// UsingLockJob a task for testing lock
 func UsingLockJob(key, worker string) {
 	for {
 		fmt.Println(worker, "apply authorization")

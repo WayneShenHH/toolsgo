@@ -12,6 +12,7 @@ import (
 	"github.com/WayneShenHH/toolsgo/tools/timeutil"
 )
 
+// JuService deal with ju message
 type JuService struct {
 	repository.Repository
 }
@@ -23,6 +24,7 @@ func New(ctx repository.Repository) *JuService {
 	}
 }
 
+// CreateJuMatch create a ju message for testing comparer
 func (service *JuService) CreateJuMatch(mid uint) {
 	var sid uint = 2
 	m := service.Repository.GetMatchByID(mid)
@@ -77,7 +79,7 @@ func (service *JuService) CreateJuMatch(mid uint) {
 	service.Repository.Rpush("worker:match:message", bytes)
 }
 func getMsgConfig(mid uint) *models.Message {
-	bytes := tools.LoadJson("msg_setting")
+	bytes := tools.LoadJSON("msg_setting")
 	msgSetting := &models.Message{}
 	json.Unmarshal(bytes, msgSetting)
 	if msgSetting.Offer.Bid == 0 {
@@ -96,6 +98,8 @@ func getMsgConfig(mid uint) *models.Message {
 	msgSetting.Offer.PushID = fmt.Sprintf("%v_%v_%v_%v_%v", mid, o.Halves, o.OtName, o.Head, o.Bid)
 	return msgSetting
 }
+
+// CreateTxMatch create a tx message for testing comparer
 func (service *JuService) CreateTxMatch(mid uint) {
 	var sid uint = 1
 	m := service.Repository.GetMatchByID(mid)
@@ -126,7 +130,7 @@ func (service *JuService) CreateTxMatch(mid uint) {
 	config := getMsgConfig(mid)
 	message := models.Message{
 		Match: models.SourceMatch{
-			ID:         0,
+			ID:         config.Match.ID,
 			SportID:    spid,
 			StartTime:  timeutil.TimeToString(m.StartTime),
 			StartDate:  timeutil.TimeToYMD(m.StartTime),
@@ -138,9 +142,9 @@ func (service *JuService) CreateTxMatch(mid uint) {
 		},
 		Offer: config.Offer,
 		MessageTime: models.MessageTime{
-			Ts:       timeutil.TimeToStamp(time.Now()),
+			OfferTs:  config.OfferTs,
 			AdpterTs: timeutil.TimeToStamp(time.Now()),
-			OfferTs:  timeutil.TimeToStamp(time.Now()),
+			Ts:       timeutil.TimeToStamp(time.Now()),
 		},
 		SourceType: "tx",
 	}
@@ -167,6 +171,8 @@ func (service *JuService) CreateTxMatch(mid uint) {
 	bytes, _ := json.Marshal(message)
 	service.Repository.Rpush("worker:match:message", bytes)
 }
+
+// Clear init all data related offer
 func (service *JuService) Clear() {
 	service.Repository.FlushDB()
 	service.Repository.ClearWorkerData()

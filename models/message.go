@@ -2,6 +2,7 @@ package models
 
 import "time"
 
+// Message tx source message
 type Message struct {
 	// OldMessage
 
@@ -77,18 +78,24 @@ type SourceOffer struct {
 	OfferLineID uint    `json:"offer_lineid"`
 	MessageTime
 }
+
+// MessageTime log time
 type MessageTime struct {
 	LastUpdated string `json:"last_updated"`
 	Ts          int64  `json:"ts"`
 	AdpterTs    int64  `json:"adpter_ts"`
 	OfferTs     int64  `json:"offer_ts"`
 }
+
+// TxMatch match_sources
 type TxMatch struct {
 	StartTime time.Time
-	SportID   uint
+	LeaderID  uint
 	HomeID    uint
 	AwayID    uint
 }
+
+// TxMessage output to excel model
 type TxMessage struct {
 	Match         string
 	OfferOt       string

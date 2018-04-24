@@ -6,6 +6,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+// Match matches
 type Match struct {
 	gorm.Model
 	StartTime         time.Time `gorm:"unique_index:idx_teams_start_time"`
