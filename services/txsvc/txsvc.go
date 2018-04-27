@@ -63,3 +63,15 @@ func OutPutCsv(fileName, data string) {
 	defer file.Close()
 	file.WriteString(data)
 }
+
+// CheckTxSchdule for watching offer is normal
+func (service *TxService) CheckTxSchdule(offsetHour time.Duration) {
+	s := time.Now().Add(time.Hour * -offsetHour)
+	e := s.Add(time.Hour * 2)
+	matches := service.Repository.GetMatchesByTime(s, e)
+	fmt.Println("[CheckTxSchdule] start_time between :", timeutil.TimeToString(s), timeutil.TimeToString(e))
+	fmt.Println("[CheckTxSchdule] matches counts:", len(matches))
+	for _, v := range matches {
+		service.GetTxMsg(v.ID)
+	}
+}

@@ -90,13 +90,7 @@ func (service *CronService) CheckTxTask(scheduler *cron.Cron) {
 	fmt.Println("[scheduletask] schedule a task for watching tx on every two hours.")
 	scheduler.AddFunc(spec, func() {
 		fmt.Println("[CheckTxTask] running at", time.Now().Format(time.Kitchen))
-		s := time.Now().Add(time.Hour * -6)
-		e := s.Add(time.Hour * 2)
 		txSvc := txsvc.New(service.Repository)
-		matches := service.Repository.GetMatchesByTime(s, e)
-		fmt.Println("[CheckTxTask] matches counts:", len(matches))
-		for _, v := range matches {
-			txSvc.GetTxMsg(v.ID)
-		}
+		txSvc.CheckTxSchdule(10)
 	})
 }

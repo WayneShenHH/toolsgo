@@ -8,13 +8,12 @@ import (
 )
 
 func repo() repository.Repository {
-	dbInstance := Connect()
-	r := redisConnext{}
-	r.Db = redisConnect()
+	dbInstance := repository.DBConnect()
+	r := repository.RedisConnect()
 	dbInstance.LogMode(true)
 	return &datastore{
 		mysql: dbInstance,
-		cache: &r,
+		cache: r,
 	}
 }
 func Test_CheckTxSchdule(t *testing.T) {
