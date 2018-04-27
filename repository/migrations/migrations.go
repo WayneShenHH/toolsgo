@@ -5,8 +5,8 @@ import (
 
 	gormigrate "github.com/go-gormigrate/gormigrate"
 	// mysql adapter
+	"github.com/WayneShenHH/toolsgo/repository"
 	"github.com/WayneShenHH/toolsgo/repository/migrations/triggers"
-	"github.com/WayneShenHH/toolsgo/repository/repositoryimpl"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql" // import the mysql driver
 )
@@ -14,7 +14,7 @@ import (
 // Migrate db schema
 func Migrate() error {
 	var err error
-	db := repositoryimpl.Connect()
+	db := repository.DBConnect()
 	err = DropAllTable(db)
 	if err != nil {
 		log.Fatalf("DropAllTable failed: %v", err)

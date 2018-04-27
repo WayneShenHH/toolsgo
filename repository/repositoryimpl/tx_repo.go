@@ -30,6 +30,7 @@ func (db *datastore) TxMessage(mid uint) []models.TxMessage {
 	// }
 	// otid := sportMap[match.SportID]
 	sql := fmt.Sprintf(`select 
+		m.match_txid as leader_id,
 		m.match,m.offer_ot,
 		m.offer_lineid,
 		m.bookmaker_name,
@@ -40,7 +41,8 @@ func (db *datastore) TxMessage(mid uint) []models.TxMessage {
 		and offer_inrunning = 1
 		#and offer_otid in (?)
 		order by 
-		m.bookmaker_name,m.cls,m.offer_ts`, env)
+		#m.cls,
+		m.bookmaker_name,m.offer_ts`, env)
 	db.mysql.Raw(sql, match.LeaderID).Scan(&list)
 	return list
 }

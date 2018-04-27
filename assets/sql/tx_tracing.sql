@@ -7,7 +7,7 @@ where 1
 and m.start_time >= DATE_FORMAT(now(),'%Y-%m-%d') 
 and m.start_time <= now()
 and m.sport_id = 1
-and m.category_id = 797
+#and m.category_id = 797
 #and m.group_id = 3318 
 order by start_time
 -- find today's running match_set

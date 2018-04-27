@@ -1,10 +1,8 @@
 package repositoryimpl
 
 import (
-	"fmt"
-	"time"
+	"sync"
 
-	"github.com/WayneShenHH/toolsgo/app"
 	"github.com/WayneShenHH/toolsgo/repository"
 	"github.com/garyburd/redigo/redis"
 	"github.com/jinzhu/gorm"
@@ -12,24 +10,44 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
+const (
+	waitTimeout = 28800 // MySQL預設值
+	maxConn     = 200
+	maxIdleConn = 100
+)
+
 type datastore struct {
 	mysql *gorm.DB
-	cache *redisConnext
+	cache *redis.Pool
 }
 
-var dbInstance *gorm.DB
+var (
+	dbInstance    *gorm.DB
+	redisInstance *redis.Pool
+	mutex         sync.Mutex
+)
 
 // New implement the Store interface with the database connection.
 // connect to database and storeage
 func New() repository.Repository {
 	if dbInstance == nil {
-		dbInstance = Connect()
+		// Use lock to prove only create one dbinstance
+		mutex.Lock()
+		if dbInstance == nil {
+			dbInstance = repository.DBConnect()
+		}
+		mutex.Unlock()
 	}
-	r := redisConnext{}
-	r.Db = redisConnect()
+	if redisInstance == nil {
+		mutex.Lock()
+		if redisInstance == nil {
+			redisInstance = repository.RedisConnect()
+		}
+		mutex.Unlock()
+	}
 	return &datastore{
 		mysql: dbInstance,
-		cache: &r,
+		cache: redisInstance,
 	}
 }
 
@@ -37,27 +55,28 @@ type redisConnext struct {
 	Db redis.Conn
 }
 
-// Connect 建立 gorm DB 連線
-func Connect() *gorm.DB {
-	config := app.Configuration()
-	db, err := gorm.Open("mysql", config.Mysql)
-	if err != nil {
-		fmt.Println("Database connection failed.", err.Error())
+// DB Get database connection
+func DB() *gorm.DB {
+	if dbInstance == nil {
+		// Use lock to prove only create one dbinstance
+		mutex.Lock()
+		if dbInstance == nil {
+			dbInstance = repository.DBConnect()
+		}
+		mutex.Unlock()
 	}
-	fmt.Println("db connect to :" + config.Mysql)
-	db.DB().SetMaxIdleConns(200)
-	// db.LogMode(true)
-	return db
+	return dbInstance
 }
 
-// redisConnect 建立 Redis 連線
-func redisConnect() redis.Conn {
-	config := app.Configuration()
-	c, err := redis.Dial("tcp", config.Redis, redis.DialDatabase(config.RedisDatabaseIndex))
-	if err != nil {
-		fmt.Println("連線失敗，1秒後重新連線。")
-		time.Sleep(1000 * time.Millisecond)
-		redisConnect()
+// Redis Get redis connection
+func Redis() redis.Conn {
+	if redisInstance == nil {
+		// Use lock to prove only create one dbinstance
+		mutex.Lock()
+		if redisInstance == nil {
+			redisInstance = repository.RedisConnect()
+		}
+		mutex.Unlock()
 	}
-	return c
+	return redisInstance.Get()
 }

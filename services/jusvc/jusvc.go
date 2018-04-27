@@ -167,6 +167,9 @@ func (service *JuService) CreateTxMatch(mid uint) {
 		message.Match.Gametime = config.Match.Gametime
 		message.Match.GameMinute = config.Match.GameMinute
 	}
+	if config.OfferTs == 0 {
+		message.OfferTs = timeutil.TimeToStamp(time.Now())
+	}
 	tools.Log(message)
 	bytes, _ := json.Marshal(message)
 	service.Repository.Rpush("worker:match:message", bytes)

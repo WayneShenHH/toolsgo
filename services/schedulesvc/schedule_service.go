@@ -6,6 +6,7 @@ import (
 
 	"github.com/WayneShenHH/toolsgo/models"
 	"github.com/WayneShenHH/toolsgo/repository"
+	"github.com/WayneShenHH/toolsgo/services/txsvc"
 	"github.com/WayneShenHH/toolsgo/tools"
 	"github.com/WayneShenHH/toolsgo/tools/timeutil"
 	"github.com/robfig/cron"
@@ -27,7 +28,12 @@ func New(ctx repository.Repository) *CronService {
 func (service *CronService) Start() {
 	scheduler := cron.New()
 	service.timerSchedule(scheduler)
+	service.CheckTxTask(scheduler)
 	scheduler.Start()
+	entries := scheduler.Entries()
+	for _, en := range entries {
+		fmt.Println(en.Job, en.Next)
+	}
 	select {} //hang on main process
 }
 func (service *CronService) timerSchedule(scheduler *cron.Cron) {
@@ -76,4 +82,21 @@ func MergeID(list []models.OfferHierarchy) ([]uint, []uint, []uint) {
 		}
 	}
 	return mso, ms, m
+}
+
+// CheckTxTask for watching offer is normal
+func (service *CronService) CheckTxTask(scheduler *cron.Cron) {
+	spec := "0 0 0/2 * * ?"
+	fmt.Println("[scheduletask] schedule a task for watching tx on every two hours.")
+	scheduler.AddFunc(spec, func() {
+		fmt.Println("[CheckTxTask] running at", time.Now().Format(time.Kitchen))
+		s := time.Now().Add(time.Hour * -6)
+		e := s.Add(time.Hour * 2)
+		txSvc := txsvc.New(service.Repository)
+		matches := service.Repository.GetMatchesByTime(s, e)
+		fmt.Println("[CheckTxTask] matches counts:", len(matches))
+		for _, v := range matches {
+			txSvc.GetTxMsg(v.ID)
+		}
+	})
 }

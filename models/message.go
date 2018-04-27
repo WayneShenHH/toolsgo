@@ -43,14 +43,14 @@ type SourceMatch struct {
 	EnableAsianNew bool     `json:"enable_asian_new"`
 
 	//即時比分
-	MatchState  string //1:First Half,2:running,3:Second Half
-	StateString string `json:"state_string"`
+	MatchState  string `json:"match_state"` //1:First Half,2:running,3:Second Half
+	StateString string `json:"state_str"`
+	Gametime    string `json:"gametime"` //比賽“包含”中場休息＆暫停，開打的時間
+	GameMinute  string `json:"minute"`   //比賽”不含“中場休息＆暫停，開打的時間
 	HomeScore   string `json:"home_score"`
 	AwayScore   string `json:"away_score"`
-	HomeRedcard string
-	AwayRedcard string
-	Gametime    string
-	GameMinute  string //比賽不含中場休息＆暫停，開打的時間
+	HomeRedcard string `json:"home_redcard"`
+	AwayRedcard string `json:"away_redcard"`
 }
 
 // SourceOffer 資料來源的 Offer
@@ -97,6 +97,7 @@ type TxMatch struct {
 
 // TxMessage output to excel model
 type TxMessage struct {
+	LeaderID      uint
 	Match         string
 	OfferOt       string
 	OfferLineid   uint

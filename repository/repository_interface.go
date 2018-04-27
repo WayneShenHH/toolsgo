@@ -1,12 +1,15 @@
 package repository
 
 import (
+	"time"
+
 	"github.com/WayneShenHH/toolsgo/models"
 	"github.com/WayneShenHH/toolsgo/models/entities"
 )
 
 // Repository interface for dao
 type Repository interface {
+	GetMatchesByTime(start, end time.Time) []entities.Match
 	GetMatchByID(id uint) *entities.Match
 	GetSourceCategoryByStruct(filter entities.CategorySource) *entities.CategorySource
 	GetSourceGroupByStruct(filter entities.GroupSource) *entities.GroupSource

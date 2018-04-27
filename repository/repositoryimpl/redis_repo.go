@@ -2,7 +2,9 @@ package repositoryimpl
 
 // Rpush call redis Rpush
 func (db *datastore) Rpush(key string, value []byte) {
-	_, err := db.cache.Db.Do("rpush", key, value)
+	r := db.cache.Get()
+	defer r.Close()
+	_, err := r.Do("rpush", key, value)
 	if err != nil {
 		panic(err)
 	}
@@ -10,7 +12,9 @@ func (db *datastore) Rpush(key string, value []byte) {
 
 // Hset call redis Hset
 func (db *datastore) Hset(key string, field string, value []byte) {
-	_, err := db.cache.Db.Do("hset", key, field, value)
+	r := db.cache.Get()
+	defer r.Close()
+	_, err := r.Do("hset", key, field, value)
 	if err != nil {
 		panic(err)
 	}
@@ -18,7 +22,9 @@ func (db *datastore) Hset(key string, field string, value []byte) {
 
 // Blpop call redis Blpop
 func (db *datastore) Blpop(key string) []byte {
-	inter, err := db.cache.Db.Do("blpop", key, 0)
+	r := db.cache.Get()
+	defer r.Close()
+	inter, err := r.Do("blpop", key, 0)
 	if inter == nil {
 		return make([]byte, 0)
 	}
@@ -32,10 +38,14 @@ func (db *datastore) Blpop(key string) []byte {
 }
 
 func (db *datastore) LRange(key string, start int, end int) []interface{} {
-	inter, _ := db.cache.Db.Do("LRANGE", key, start, end)
+	r := db.cache.Get()
+	defer r.Close()
+	inter, _ := r.Do("LRANGE", key, start, end)
 	message := inter.([]interface{})
 	return message
 }
 func (db *datastore) FlushDB() {
-	db.cache.Db.Do("FLUSHDB")
+	r := db.cache.Get()
+	defer r.Close()
+	r.Do("FLUSHDB")
 }

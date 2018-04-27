@@ -1,27 +1,27 @@
 {
     "match": {
-        "id":4193557,
-        "match_state": null,
-        "state_string": null,
-        "home_score": null,
-        "away_score": null,
-        "HomeRedcard": null,
-        "AwayRedcard": null,
-        "Gametime": null,
-        "Minute": null
+        "id": 4193557,
+        "match_state": "",
+        "state_str": "",
+        "gametime": "",
+        "minute": "88",
+        "home_score": "",
+        "away_score": "",
+        "home_redcard": "",
+        "away_redcard": ""
     },
     "offer": {
         "bid": 282,
         "halves": "full",
         "otname": "point",
-        "h_odd": 0.8,
+        "h_odd": 0.7,
         "a_odd": 1.2,
         "head": -2.5,
         "proportion": 0,
         "offer_lineid": 1,
         "is_asians": false,
         "is_otb": false,
-        "is_running": false
+        "is_running": true
     },
-    "offer_ts":1524280946390
+    "offer_ts": 0
 }
