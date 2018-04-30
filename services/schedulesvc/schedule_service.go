@@ -27,13 +27,9 @@ func New(ctx repository.Repository) *CronService {
 // Start worker
 func (service *CronService) Start() {
 	scheduler := cron.New()
-	service.timerSchedule(scheduler)
+	// service.timerSchedule(scheduler)
 	service.CheckTxTask(scheduler)
 	scheduler.Start()
-	entries := scheduler.Entries()
-	for _, en := range entries {
-		fmt.Println(en.Job, en.Next)
-	}
 	select {} //hang on main process
 }
 func (service *CronService) timerSchedule(scheduler *cron.Cron) {

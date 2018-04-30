@@ -29,12 +29,12 @@ var (
 
 // New implement the Store interface with the database connection.
 // connect to database and storeage
-func New() repository.Repository {
+func New(logMode bool) repository.Repository {
 	if dbInstance == nil {
 		// Use lock to prove only create one dbinstance
 		mutex.Lock()
 		if dbInstance == nil {
-			dbInstance = repository.DBConnect()
+			dbInstance = repository.DBConnect(logMode)
 		}
 		mutex.Unlock()
 	}
@@ -56,12 +56,12 @@ type redisConnext struct {
 }
 
 // DB Get database connection
-func DB() *gorm.DB {
+func DB(logMode bool) *gorm.DB {
 	if dbInstance == nil {
 		// Use lock to prove only create one dbinstance
 		mutex.Lock()
 		if dbInstance == nil {
-			dbInstance = repository.DBConnect()
+			dbInstance = repository.DBConnect(logMode)
 		}
 		mutex.Unlock()
 	}

@@ -15,7 +15,7 @@ var logCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		mid := args[0]
 		i, _ := strconv.Atoi(mid)
-		repo := repositoryimpl.New()
+		repo := repositoryimpl.New(false)
 		log := logsvc.New(repo)
 		log.Read(int(i), int(i))
 	},

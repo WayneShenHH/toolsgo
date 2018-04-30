@@ -57,9 +57,16 @@ func StampToTime(stamp int64) time.Time {
 
 // StringToTime 轉回時間的統一做法 UTC
 func StringToTime(timeString string) time.Time {
-	layout := "2006-01-02 15:04:05 UTC"
-	time, _ := time.Parse(layout, timeString)
-	return time
+	var ts time.Time
+	var err error
+	layouts := []string{"2006-01-02T15:04:05.000Z", "2006-01-02 15:04:05 +00:00", "2006-01-02 15:04:05 UTC", "2006-01-02T15:04:05Z", "2006-01-02T15:04:05+00:00"}
+	for _, layout := range layouts {
+		ts, err = time.Parse(layout, timeString)
+		if err == nil {
+			return ts
+		}
+	}
+	return ts
 }
 
 // TimeToDateString 時間轉MMDDHHmm，UTC

@@ -19,7 +19,7 @@ const (
 )
 
 // DBConnect 取得 gorm DB 連線池
-func DBConnect() *gorm.DB {
+func DBConnect(logMode bool) *gorm.DB {
 	config := app.Configuration()
 	db, err := gorm.Open("mysql", config.Mysql)
 	if err != nil {
@@ -28,7 +28,7 @@ func DBConnect() *gorm.DB {
 	db.DB().SetConnMaxLifetime(time.Second * waitTimeout / 2)
 	db.DB().SetMaxIdleConns(maxIdleConn)
 	db.DB().SetMaxOpenConns(maxConn)
-	// db.LogMode(true)
+	db.LogMode(logMode)
 	fmt.Printf("Connect to MySQL %s successful\n", config.Mysql)
 	return db
 }

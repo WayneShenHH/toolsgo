@@ -75,7 +75,7 @@ func (manager *SocketHub) send(channel WSChannel, message []byte, ignore *Client
 }
 func subscribe(channel WSChannel) {
 	keys := app.GetKeys()
-	repo := repositoryimpl.New()
+	repo := repositoryimpl.New(false)
 	var key string
 	switch channel {
 	case Operator:

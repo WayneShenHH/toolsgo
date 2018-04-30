@@ -25,6 +25,9 @@ func New(ctx repository.Repository) *TxService {
 // GetTxMsg get tx source data for a match
 func (service *TxService) GetTxMsg(mid uint) {
 	list := service.Repository.TxMessage(mid)
+	if len(list) == 0 {
+		return
+	}
 	data := "match_id,offer_lineid,bookmaker,line,home_odds,away_odds,offer_ts\n"
 	dataAbnormal := data
 	lastItem := list[0]
