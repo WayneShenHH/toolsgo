@@ -23,9 +23,8 @@ type Repository interface {
 	Blpop(key string) []byte
 	LRange(key string, start int, end int) []interface{}
 	FlushDB()
-	ClearOdds()
 	ClearWorkerData()
 	TxMessage(mid uint) []models.TxMessage
 	GetOldData() *[]models.OfferHierarchy
-	ClearOldData(msoid, msid []uint)
+	ClearOldData()
 }

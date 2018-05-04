@@ -60,7 +60,7 @@ func rowToString(row models.TxMessage) string {
 
 // OutPutCsv out put csv file
 func OutPutCsv(fileName, data string) {
-	path := fmt.Sprintf("./assets/csv/%v.csv", fileName)
+	path := fmt.Sprintf("/Users/wayneshen/Google Drive File Stream/My Drive/tx-offer-time-interval/%v.csv", fileName)
 	os.Remove(path)
 	file, _ := os.Create(path)
 	defer file.Close()

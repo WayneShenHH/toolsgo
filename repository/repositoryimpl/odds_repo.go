@@ -1,21 +1,11 @@
 package repositoryimpl
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/WayneShenHH/toolsgo/models"
-	"github.com/WayneShenHH/toolsgo/tools/timeutil"
 )
 
-func (db *datastore) ClearOdds() {
-	st := time.Now().Add(time.Hour * (-48))
-	sql := `
-	delete from odds 
-	where (select start_time from matches where id = odds.match_id) < '%v' limit 10000;`
-	fmt.Println("clear data before :", timeutil.TimeToYMD(st))
-	db.mysql.Exec(fmt.Sprintf(sql, timeutil.TimeToYMD(st)))
-}
 func (db *datastore) GetOldData() *[]models.OfferHierarchy {
 	st := time.Now().Add(time.Hour * (-48))
 	list := &[]models.OfferHierarchy{}
@@ -25,11 +15,16 @@ func (db *datastore) GetOldData() *[]models.OfferHierarchy {
 	db.mysql.Raw(sql, st).Scan(list)
 	return list
 }
-func (db *datastore) ClearOldData(msoid, msid []uint) {
-	sql := `delete from match_set_offers where id in (?);`
-	db.mysql.Exec(sql, msoid)
-	sql = `delete from odds where match_set_offer_id in (?);`
-	db.mysql.Exec(sql, msoid)
-	sql = `delete from match_sets where id in (?);`
-	db.mysql.Exec(sql, msid)
+func (db *datastore) ClearOldData() {
+	st := time.Now().Add(time.Hour * (-48))
+	sql := `delete from match_set_offers 
+	where (select start_time from match_sets where id=match_set_offers.match_set_id) < ? 
+	or (select id from match_sets where id=match_set_offers.match_set_id) is null limit 10000;`
+	db.mysql.Exec(sql, st)
+	sql = `delete from odds
+	where (select start_time from matches where id = odds.match_id) < ? 
+	and (select odds_id from order_items i where i.odds_id = odds.id) is null limit 10000;`
+	db.mysql.Exec(sql, st)
+	sql = `select * from match_sets where start_time < ? limit 10000;`
+	db.mysql.Exec(sql, st)
 }

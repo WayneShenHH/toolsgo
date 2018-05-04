@@ -49,16 +49,9 @@ func (service *CronService) ClearDataTask() {
 	i := 1
 	for {
 		fmt.Print(i, " -> ")
-		list := service.Repository.GetOldData()
-		mso, ms, _ := MergeID(*list)
 		cnt := timeutil.GetTimer()
-		if len(mso) > 0 {
-			service.Repository.ClearOldData(mso, ms)
-			cnt.Counting("ClearDataTask")
-		} else {
-			fmt.Println("[ClearDataTask] No data, sleep 10 seconds.")
-			time.Sleep(time.Second * 10)
-		}
+		service.Repository.ClearOldData()
+		cnt.Counting("ClearDataTask")
 		i++
 	}
 }

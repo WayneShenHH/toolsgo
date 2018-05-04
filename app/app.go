@@ -10,6 +10,7 @@ func Env() string {
 	env := os.Getenv("GO_ENV")
 	if env == "" {
 		env = "development"
+		// env = "production"
 	}
 	return env
 }
