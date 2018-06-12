@@ -3,6 +3,7 @@ package jusvc
 import (
 	"encoding/json"
 	"fmt"
+	"math/rand"
 	"time"
 
 	"github.com/WayneShenHH/toolsgo/models"
@@ -170,9 +171,20 @@ func (service *JuService) CreateTxMatch(mid uint) {
 	if config.OfferTs == 0 {
 		message.OfferTs = timeutil.TimeToStamp(time.Now())
 	}
-	tools.Log(message)
-	bytes, _ := json.Marshal(message)
-	service.Repository.Rpush("worker:match:message", bytes)
+	service.MultiInsert(int(message.OfferTs), message)
+}
+
+//MultiInsert multiple insert messages
+func (service *JuService) MultiInsert(cnt int, message models.Message) {
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	for i := 0; i < cnt; i++ {
+		tools.Log(message)
+		bytes, _ := json.Marshal(message)
+		service.Repository.Rpush("worker:match:message", bytes)
+		message.OfferTs++
+		message.Offer.Hodd = r.Float64()/10 + 1.9
+		message.Offer.Aodd = r.Float64()/10 + 1.9
+	}
 }
 
 // Clear init all data related offer

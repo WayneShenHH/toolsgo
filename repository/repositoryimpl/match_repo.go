@@ -15,8 +15,10 @@ func (db *datastore) GetMatchByID(id uint) *entities.Match {
 func (db *datastore) ClearWorkerData() {
 	db.mysql.Exec(`truncate match_sets;
 		truncate match_set_offers;
+		truncate log_pushes;
 		truncate odds;
 		truncate log_closes;
+		truncate log_operators;
 		update matches set available = 0, is_closed = 0, available_time = null;`)
 }
 func (db *datastore) GetMatchesByTime(start, end time.Time) []entities.Match {

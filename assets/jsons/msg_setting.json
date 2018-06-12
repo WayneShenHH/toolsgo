@@ -1,10 +1,10 @@
 {
     "match": {
-        "id": 4193557,
+        "id": 4786490,
         "match_state": "",
         "state_str": "",
         "gametime": "",
-        "minute": "88",
+        "minute": "",
         "home_score": "",
         "away_score": "",
         "home_redcard": "",
@@ -14,14 +14,14 @@
         "bid": 282,
         "halves": "full",
         "otname": "point",
-        "h_odd": 0.7,
-        "a_odd": 1.2,
+        "h_odd": 0.95,
+        "a_odd": 0.95,
         "head": -2.5,
         "proportion": 0,
         "offer_lineid": 1,
         "is_asians": false,
         "is_otb": false,
-        "is_running": true
+        "is_running": false
     },
-    "offer_ts": 0
+    "offer_ts": 1
 }

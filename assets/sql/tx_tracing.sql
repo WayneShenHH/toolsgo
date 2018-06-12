@@ -19,7 +19,7 @@ where s.match_id = 42831 and s.source_id=1
 select m.home_score,m.hteam_name,m.ateam_name,m.offer_otid,m.offer_ot,
 m.bookmaker_name,m.cls,m.price_oh,m.price_oa,m.price_od,m.offer_inrunning,FROM_UNIXTIME(m.offer_ts/1000) as offer_ts 
 from price_updates m where 1
-and match_id = 4755146
+and match_txid = 4755146
 and bookmaker_id = 282
 and offer_inrunning = 1
 #and offer_otid in (245,6,61,59)
