@@ -16,12 +16,12 @@
         "otname": "point",
         "h_odd": 0.95,
         "a_odd": 0.95,
-        "head": -2.5,
+        "head": -5.5,
         "proportion": 0,
         "offer_lineid": 1,
         "is_asians": false,
         "is_otb": false,
         "is_running": false
     },
-    "offer_ts": 1
+    "offer_ts": 5
 }

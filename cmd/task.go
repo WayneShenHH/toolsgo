@@ -19,6 +19,8 @@ var msgCmd = &cobra.Command{
 		switch args[0] {
 		case "match":
 			ju.InsertMessage("worker:match:message", "msg_match")
+		case "rmatch":
+			ju.InsertMessage("offer:2018-06-23", "msg_match")
 		case "offer":
 			ju.InsertMessage("worker:offer:message", "msg_offer")
 		case "bp":

@@ -6,17 +6,23 @@
 ### start http server
     $ ~/go/bin/waynego server
 
-### start nsq consuming worker
-    $ ~/go/bin/waynego nsq <topic-name>
-
 ### create ju match data & insert into redis
     $ ~/go/bin/waynego ju <match_id>
 
 ### insert testing data to redis
     $ ~/go/bin/waynego msg match|offer|bp|bo
 
+### start nsq consuming worker
+    $ ./toolsgo nsq <topic-name> <channel-name>
+
+### produce a message to nsqd
+    $ ./toolsgo nsq:msg <topic-name> <message>
+
 ### add topics to nsqd
-    $ ~/go/bin/waynego nsq:topic name1,name2,...
+    $ ./toolsgo topic:add name1,name2,...
+
+### get all topics
+    $ ./toolsgo topic:all
 
 ## start nsq services
     

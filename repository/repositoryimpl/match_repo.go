@@ -26,3 +26,8 @@ func (db *datastore) GetMatchesByTime(start, end time.Time) []entities.Match {
 	db.mysql.Model(&entities.Match{}).Where("start_time > ? AND start_time < ?", start, end).Find(&matches)
 	return matches
 }
+func (db *datastore) GetSourceMatchByStruct(filter entities.MatchSource) *entities.MatchSource {
+	m := &entities.MatchSource{}
+	db.mysql.Where(filter).Find(m)
+	return m
+}

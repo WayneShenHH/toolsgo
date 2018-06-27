@@ -14,12 +14,6 @@
   revision = "3a771d992973f24aa725d07868b467d1ddfceafb"
 
 [[projects]]
-  name = "github.com/bitly/go-nsq"
-  packages = ["."]
-  revision = "eee57a3ac4174c55924125bb15eeeda8cffb6e6f"
-  version = "v1.0.7"
-
-[[projects]]
   name = "github.com/codegangsta/cli"
   packages = ["."]
   revision = "cfb38830724cc34fedffe9a2a29fb54fa9169cd1"
@@ -230,6 +224,12 @@
   revision = "00c29f56e2386353d58c599509e8dc3801b0d716"
 
 [[projects]]
+  name = "github.com/nsqio/go-nsq"
+  packages = ["."]
+  revision = "eee57a3ac4174c55924125bb15eeeda8cffb6e6f"
+  version = "v1.0.7"
+
+[[projects]]
   name = "github.com/pelletier/go-toml"
   packages = ["."]
   revision = "acdc4509485b587f5e675510c4f2c63e90ff68a8"
@@ -394,6 +394,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "08d337c0f0591375988ba04680fbdf3e6568a825a6aa0d06a79ce1fb235ed9f0"
+  inputs-digest = "fbea90e20df0601fd74642e9be65cfa3f04bd989e14e40b08218fa4b5ccc9388"
   solver-name = "gps-cdcl"
   solver-version = 1

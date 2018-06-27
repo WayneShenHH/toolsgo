@@ -25,3 +25,19 @@ type Match struct {
 	AwayScore  uint
 	GameMinute uint //比賽不含中場休息＆暫停，開打經過的時間
 }
+
+/*MatchSource 資料源 match 資料
+比賽資料參考的資料來源
+*/
+type MatchSource struct {
+	gorm.Model
+	LeaderID   uint      `gorm:"index:idx_leader_id"`
+	StartTime  time.Time `gorm:"unique_index:idx_teams_start_time"`
+	HteamID    uint      `gorm:"not null;unique_index:idx_teams_start_time"`
+	AteamID    uint      `gorm:"not null;unique_index:idx_teams_start_time"`
+	CategoryID uint      `gorm:"not null;"`
+	GroupID    uint      `gorm:"not null;unique_index:idx_teams_start_time"`
+	SportID    uint      `gorm:"not null;"`
+	MatchID    uint
+	SourceID   uint
+}

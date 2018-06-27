@@ -2,13 +2,12 @@ package nsqsvc
 
 import (
 	"encoding/json"
+	"fmt"
+	"io/ioutil"
 	"net/http"
 	"strings"
-	"time"
 
-	"github.com/WayneShenHH/toolsgo/models"
-	"github.com/WayneShenHH/toolsgo/tools"
-	nsq "github.com/bitly/go-nsq"
+	nsq "github.com/nsqio/go-nsq"
 )
 
 const (
@@ -16,46 +15,30 @@ const (
 	nsqHTTP       = "127.0.0.1:4151" //:4151
 	nsqLookupTCP  = "127.0.0.1:4160" //:4160
 	nsqLookupHTTP = "127.0.0.1:4161" //:4161 , consumer
-	channel       = "ch_1"
-	topicAll      = "comparer_msg,comparer_timer,offer_msg,offer_timer,spider_msg,spider_timer,broadcast_operator,broadcast_player"
 )
 
-var nsqdProducer map[string]*nsq.Producer
-var nsqConsumer map[string]*nsq.Consumer
-
 // NsqConsumeWorker worker for consuming message
-func NsqConsumeWorker(topic string) {
-	NsqConsume(topic, func(msg []byte) {
-		var m models.Message
-		json.Unmarshal(msg, &m)
-		tools.Log(m, time.Now())
+func NsqConsumeWorker(topic, channel string) {
+	NsqConsume(topic, channel, func(msg []byte) error {
+		fmt.Println(string(msg))
+		return nil
 	})
 	select {}
 }
 
 // NsqProduceMessage for produce message from json file
-func NsqProduceMessage(topic string) {
-	jsonfile := "match_point"
-	data := models.Message{}
-	bytes := tools.LoadJSON(jsonfile)
-	json.Unmarshal(bytes, &data)
-	tools.Log(data, time.Now())
-	NsqProduce(topic, data)
+func NsqProduceMessage(topic, msg string) {
+	fmt.Println("Produce a message:", msg, ", send to topic:", topic)
+	NsqProduce(topic, msg)
 }
 
 // NsqProduce produce from data
 func NsqProduce(topic string, obj interface{}) error {
-	if nsqdProducer == nil {
-		nsqdProducer = make(map[string]*nsq.Producer)
-	}
-	_, hasKey := nsqdProducer[topic]
-	if !hasKey {
-		config := nsq.NewConfig()
-		conn, _ := nsq.NewProducer(nsqTCP, config)
-		nsqdProducer[topic] = conn
-	}
+	config := nsq.NewConfig()
+	producer, _ := nsq.NewProducer(nsqTCP, config)
 	body, e := json.Marshal(obj)
-	e = nsqdProducer[topic].Publish(topic, body)
+	e = producer.Publish(topic, body)
+	producer.Stop()
 	return e
 }
 
@@ -63,31 +46,42 @@ func NsqProduce(topic string, obj interface{}) error {
 func NsqAddTopic(topics ...string) {
 	for _, topic := range topics {
 		post(nsqHTTP+"/topic/create?topic="+topic, "")
-		post(nsqHTTP+"/channel/create?topic="+topic+"&channel="+channel, "")
 	}
 }
 
+//NsqGetTopics get all
+func NsqGetTopics() []string {
+	bytes := get(nsqLookupHTTP + "/topics")
+	r := TopicResponse{}
+	json.Unmarshal(bytes, &r)
+	fmt.Println(string(bytes))
+	return r.Topics
+}
+
 // NsqConsume consume a topic
-func NsqConsume(topic string, task func(msg []byte)) {
-	if nsqConsumer == nil {
-		nsqConsumer = make(map[string]*nsq.Consumer)
+func NsqConsume(topic, ch string, task func(msg []byte) error) {
+	list := NsqGetTopics()
+	has := false
+	for _, v := range list {
+		if v == topic {
+			has = true
+			break
+		}
 	}
-	_, hasKey := nsqConsumer[topic]
-	if !hasKey {
-		config := nsq.NewConfig()
-		q, _ := nsq.NewConsumer(topic, channel, config)
-		nsqConsumer[topic] = q
+	if !has {
+		panic("topic doesn't exist")
 	}
-	nsqConsumer[topic].AddHandler(nsq.HandlerFunc(func(message *nsq.Message) error {
-		task(message.Body)
-		return nil
+	client, _ := nsq.NewConsumer(topic, ch, nsq.NewConfig())
+	client.AddHandler(nsq.HandlerFunc(func(message *nsq.Message) error {
+		return task(message.Body)
 	}))
-	// err := nsqConsumer[topic].ConnectToNSQLookupd(nsqLookupHTTP)
-	err := nsqConsumer[topic].ConnectToNSQD(nsqTCP)
+	err := client.ConnectToNSQLookupd(nsqLookupHTTP)
+	// err := client.ConnectToNSQD(nsqTCP)
 	if err != nil {
-		tools.Log(err.Error())
+		panic(err.Error())
 	}
 }
+
 func post(url string, obj interface{}) *http.Response {
 	body, _ := json.Marshal(obj)
 	reader := strings.NewReader(string(body))
@@ -95,4 +89,18 @@ func post(url string, obj interface{}) *http.Response {
 	client := &http.Client{}
 	rsp, _ := client.Do(request)
 	return rsp
+}
+func get(url string) []byte {
+	rsp, err := http.Get("http://" + url)
+	if err != nil {
+		panic(err.Error())
+	}
+	defer rsp.Body.Close()
+	body, _ := ioutil.ReadAll(rsp.Body)
+	return body
+}
+
+// TopicResponse rsp fro topic
+type TopicResponse struct {
+	Topics []string `json:"topics"`
 }

@@ -105,33 +105,21 @@ func (service *JuService) CreateTxMatch(mid uint) {
 	var sid uint = 1
 	m := service.Repository.GetMatchByID(mid)
 	spid := m.SportID
-	h := entities.TeamSource{
-		SourceID: sid,
-		TeamID:   m.HteamID,
-	}
-	a := entities.TeamSource{
-		SourceID: sid,
-		TeamID:   m.AteamID,
-	}
-	g := entities.GroupSource{
-		SourceID: sid,
-		GroupID:  m.GroupID,
-	}
-	c := entities.CategorySource{
-		SourceID:   sid,
-		CategoryID: m.CategoryID,
-	}
-	c2 := service.Repository.GetSourceCategoryByStruct(c)
-	g2 := service.Repository.GetSourceGroupByStruct(g)
-	h2 := service.Repository.GetSourceTeamByStruct(h)
-	a2 := service.Repository.GetSourceTeamByStruct(a)
+	m2 := service.Repository.GetSourceMatchByStruct(entities.MatchSource{MatchID: m.ID, SourceID: sid})
+	c2 := service.Repository.GetSourceCategoryByStruct(entities.CategorySource{SourceID: sid, CategoryID: m.CategoryID})
+	g2 := service.Repository.GetSourceGroupByStruct(entities.GroupSource{SourceID: sid, GroupID: m.GroupID})
+	h2 := service.Repository.GetSourceTeamByStruct(entities.TeamSource{SourceID: sid, TeamID: m.HteamID})
+	a2 := service.Repository.GetSourceTeamByStruct(entities.TeamSource{SourceID: sid, TeamID: m.AteamID})
 	if c2.ID == 0 || g2.ID == 0 || h2.ID == 0 || a2.ID == 0 {
 		fmt.Println("data may not complete")
 	}
 	config := getMsgConfig(mid)
+	if m2.LeaderID == 0 {
+		m2.LeaderID = config.Match.ID
+	}
 	message := models.Message{
 		Match: models.SourceMatch{
-			ID:         config.Match.ID,
+			ID:         m2.LeaderID,
 			SportID:    spid,
 			StartTime:  timeutil.TimeToString(m.StartTime),
 			StartDate:  timeutil.TimeToYMD(m.StartTime),

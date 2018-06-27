@@ -14,6 +14,7 @@ type Repository interface {
 	GetSourceCategoryByStruct(filter entities.CategorySource) *entities.CategorySource
 	GetSourceGroupByStruct(filter entities.GroupSource) *entities.GroupSource
 	GetSourceTeamByStruct(filter entities.TeamSource) *entities.TeamSource
+	GetSourceMatchByStruct(filter entities.MatchSource) *entities.MatchSource
 	GetUser(username string) (*entities.User, error)
 	UpdatesUser(id uint, fields *entities.User) error
 	GetUserByToken(token string) (*entities.User, error)
