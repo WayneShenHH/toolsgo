@@ -87,7 +87,7 @@ func getMsgConfig(mid uint) *models.Message {
 		msgSetting.Offer = models.SourceOffer{
 			Bid:        999,
 			OtName:     "point",
-			Head:       -1.0,
+			Head:       "-1.0",
 			Proportion: 50,
 			Halves:     "full",
 			Hodd:       0.95,
@@ -96,7 +96,7 @@ func getMsgConfig(mid uint) *models.Message {
 		}
 	}
 	o := &msgSetting.Offer
-	msgSetting.Offer.PushID = fmt.Sprintf("%v_%v_%v_%v_%v", mid, o.Halves, o.OtName, o.Head, o.Bid)
+	msgSetting.Offer.PushID = fmt.Sprintf("%v_%v_%v_%v_%v", mid, o.HalvesType, o.PlayType, o.Head, o.Bid)
 	return msgSetting
 }
 
@@ -159,7 +159,7 @@ func (service *JuService) CreateTxMatch(mid uint) {
 	if config.OfferTs == 0 {
 		message.OfferTs = timeutil.TimeToStamp(time.Now())
 	}
-	service.MultiInsert(int(message.OfferTs), message)
+	service.MultiInsert(config.Mul, message)
 }
 
 //MultiInsert multiple insert messages

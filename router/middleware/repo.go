@@ -10,7 +10,7 @@ import (
 // Store is a middleware function that initializes the datastore and attaches to
 // the context of every request context.
 func Store(cli *cli.Context) gin.HandlerFunc {
-	repo := repositoryimpl.New(false)
+	repo := repositoryimpl.New()
 	return func(c *gin.Context) {
 		repository.ToContext(c, repo)
 		c.Next()

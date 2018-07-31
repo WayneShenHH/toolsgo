@@ -14,13 +14,13 @@ var msgCmd = &cobra.Command{
 	Long:  "insert msg cmd",
 	Use:   "msg",
 	Run: func(cmd *cobra.Command, args []string) {
-		repo := repositoryimpl.New(false)
+		repo := repositoryimpl.New()
 		ju := jusvc.New(repo)
 		switch args[0] {
 		case "match":
 			ju.InsertMessage("worker:match:message", "msg_match")
-		case "rmatch":
-			ju.InsertMessage("offer:2018-06-23", "msg_match")
+		case "bmatch":
+			ju.InsertMessage("2018-06-22:backup", "msg_match")
 		case "offer":
 			ju.InsertMessage("worker:offer:message", "msg_offer")
 		case "bp":
@@ -42,7 +42,7 @@ var juCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		mid := args[0]
 		i, _ := strconv.Atoi(mid)
-		repo := repositoryimpl.New(false)
+		repo := repositoryimpl.New()
 		ju := jusvc.New(repo)
 		if clearFlag {
 			ju.Clear()
@@ -57,7 +57,7 @@ var txCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		mid := args[0]
 		i, _ := strconv.Atoi(mid)
-		repo := repositoryimpl.New(false)
+		repo := repositoryimpl.New()
 		ju := jusvc.New(repo)
 		if clearFlag {
 			ju.Clear()
@@ -70,7 +70,7 @@ var txAdaptorCmd = &cobra.Command{
 	Long:  `tx message`,
 	Use:   "txmsg",
 	Run: func(cmd *cobra.Command, args []string) {
-		repo := repositoryimpl.New(false)
+		repo := repositoryimpl.New()
 		tx := txsvc.New(repo)
 		tx.GetTxMsg(matchID)
 	},

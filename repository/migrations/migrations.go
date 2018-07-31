@@ -14,7 +14,7 @@ import (
 // Migrate db schema
 func Migrate() error {
 	var err error
-	db := repository.DBConnect(true)
+	db := repository.DBConnect()
 	err = DropAllTable(db)
 	if err != nil {
 		log.Fatalf("DropAllTable failed: %v", err)

@@ -12,16 +12,17 @@
     },
     "offer": {
         "bid": 282,
-        "halves": "full",
-        "otname": "point",
-        "h_odd": 0.95,
-        "a_odd": 0.95,
-        "head": -5.5,
+        "halves_type": "full",
+        "play_type": "point",
+        "h_odd": 0.98,
+        "a_odd": 0.92,
+        "head": "-1.5",
         "proportion": 0,
         "offer_lineid": 1,
         "is_asians": false,
         "is_otb": false,
         "is_running": false
     },
-    "offer_ts": 5
+    "offer_ts": 1,
+    "Mul": 1
 }

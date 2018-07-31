@@ -12,6 +12,7 @@ type Message struct {
 	// Bid        int         `json:"bid"`
 	Offer SourceOffer `json:"offer"`
 	Match SourceMatch `json:"match"`
+	Mul   int
 }
 
 // SourceMatch 資料來源的 match
@@ -63,7 +64,7 @@ type SourceOffer struct {
 	OtName      string  `json:"otname"`
 	HalvesType  string  `json:"halves_type"`
 	PlayType    string  `json:"play_type"`
-	Head        float64 `json:"head"`
+	Head        string  `json:"head"`
 	Hodd        float64 `json:"h_odd"`
 	Aodd        float64 `json:"a_odd"`
 	Dodd        float64 `json:"d_odd"`

@@ -13,7 +13,7 @@ var monitorCmd = &cobra.Command{
 	Long:  `monitor svc on linux,ex:GO_ENV=test /Users/wayneshen/go/bin/waynego  monitor -c "#ch2" -m Alice -i5 -e jj`,
 	Use:   "monitor",
 	Run: func(cmd *cobra.Command, args []string) {
-		repo := repositoryimpl.New(false)
+		repo := repositoryimpl.New()
 		svc := monitorsvc.New(repo, machine, emoji, channel, timeInterval)
 		fmt.Println(timeInterval, machine, emoji, channel)
 		svc.Start()

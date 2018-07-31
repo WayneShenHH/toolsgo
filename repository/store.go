@@ -6,41 +6,60 @@ import (
 	"time"
 
 	"github.com/WayneShenHH/toolsgo/app"
+	"github.com/WayneShenHH/toolsgo/module/logger"
 	"github.com/garyburd/redigo/redis"
 	"github.com/jinzhu/gorm"
 )
 
-// Key is the key name of the store in the Gin context.
-const Key = "store"
 const (
 	waitTimeout = 28800 // MySQL預設值
-	maxConn     = 200
-	maxIdleConn = 100
+	// maxConn     = 200
+	// maxIdleConn = 100
 )
 
+// Context 外部資源
+type Context struct {
+	// DbContext *gorm.DB
+	// Redis      *redis.Redis
+	Repository Repository
+}
+
 // DBConnect 取得 gorm DB 連線池
-func DBConnect(logMode bool) *gorm.DB {
-	config := app.Configuration()
-	db, err := gorm.Open("mysql", config.Mysql)
+func DBConnect() *gorm.DB {
+	config := app.Setting.Database
+	connectionString := mysqlArgs()
+	db, err := gorm.Open("mysql", connectionString)
 	if err != nil {
+		logger.Debug(connectionString)
+		logger.Error(err.Error())
 		panic("Database connection failed.")
 	}
 	db.DB().SetConnMaxLifetime(time.Second * waitTimeout / 2)
-	db.DB().SetMaxIdleConns(maxIdleConn)
-	db.DB().SetMaxOpenConns(maxConn)
-	db.LogMode(logMode)
-	fmt.Printf("Connect to MySQL %s successful\n", config.Mysql)
+	db.DB().SetMaxIdleConns(config.MaxIdleConns)
+	db.DB().SetMaxOpenConns(config.MaxConns)
+	db.LogMode(config.LogMode)
+	logger.Debug(fmt.Sprintf("Connect to MySQL %s successful", connectionString))
 	return db
+}
+func mysqlArgs() string {
+	return fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=%v&parseTime=true&loc=UTC&multiStatements=true",
+		app.Setting.Database.Username,
+		app.Setting.Database.Password,
+		app.Setting.Database.Host,
+		app.Setting.Database.Port,
+		app.Setting.Database.Name,
+		app.Setting.Database.Encoding)
 }
 
 // RedisConnect 取得 redis 連線池
 func RedisConnect() *redis.Pool {
-	config := app.Configuration()
+	config := app.Setting.Redis
 	return &redis.Pool{
-		MaxIdle:   30,
-		MaxActive: 1000, // max number of connections
+		MaxIdle:   config.MaxIdleConns,
+		MaxActive: config.MaxConns, // max number of connections
 		Dial: func() (redis.Conn, error) {
-			c, err := redis.Dial("tcp", config.Redis, redis.DialDatabase(config.RedisDatabaseIndex))
+			hap := fmt.Sprintf("%v:%v", config.Host, config.Port)
+			c, err := redis.Dial("tcp", hap, redis.DialDatabase(config.Index))
 			if err != nil {
 				panic(err.Error())
 			}
@@ -48,6 +67,9 @@ func RedisConnect() *redis.Pool {
 		},
 	}
 }
+
+// Key is the key name of the store in the Gin context.
+const Key = "store"
 
 // Setter defines a context that enables setting values.
 type Setter interface {
@@ -61,6 +83,6 @@ func FromContext(c context.Context) Repository {
 
 // ToContext adds the Store to this context if it supports
 // the Setter interface.
-func ToContext(c Setter, repo Repository) {
-	c.Set(Key, repo)
+func ToContext(c Setter, store Repository) {
+	c.Set(Key, store)
 }

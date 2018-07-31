@@ -8,7 +8,7 @@ import (
 )
 
 func Test_log(t *testing.T) {
-	repo := repositoryimpl.New(false)
+	repo := repositoryimpl.New()
 	svc := logsvc.New(repo)
 	svc.Read(0, 1)
 }

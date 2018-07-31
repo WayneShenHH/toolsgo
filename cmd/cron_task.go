@@ -16,7 +16,7 @@ var workerScheduleCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(cmd.Short)
 		fmt.Println(cmd.Long)
-		repo := repositoryimpl.New(false)
+		repo := repositoryimpl.New()
 		svc := schedulesvc.New(repo)
 		svc.Start()
 	},
@@ -29,7 +29,7 @@ var clearOddsCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(cmd.Short)
 		fmt.Println(cmd.Long)
-		repo := repositoryimpl.New(false)
+		repo := repositoryimpl.New()
 		svc := schedulesvc.New(repo)
 		svc.ClearDataTask()
 	},

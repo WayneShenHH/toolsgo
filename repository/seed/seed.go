@@ -4,6 +4,6 @@ import "github.com/WayneShenHH/toolsgo/repository/repositoryimpl"
 
 // Seed seed on db reset
 func Seed() {
-	repo := repositoryimpl.New(false)
+	repo := repositoryimpl.New()
 	AddPlayTypes(repo)
 }

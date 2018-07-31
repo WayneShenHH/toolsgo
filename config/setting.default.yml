@@ -1,0 +1,17 @@
+database:
+  username: root
+  password: 123456
+  host: localhost
+  Name: dev_sbodds
+  pool: 5
+  timeout: 5000
+  port: 3306
+  encoding: utf8
+  maxidleconns: 10
+  maxconns: 10
+redis:
+  host: localhost
+  port: 6379
+  index: 0
+notify:
+  slackenable: false

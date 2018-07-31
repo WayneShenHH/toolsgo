@@ -10,12 +10,6 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-const (
-	waitTimeout = 28800 // MySQL預設值
-	maxConn     = 200
-	maxIdleConn = 100
-)
-
 type datastore struct {
 	mysql *gorm.DB
 	cache *redis.Pool
@@ -29,12 +23,12 @@ var (
 
 // New implement the Store interface with the database connection.
 // connect to database and storeage
-func New(logMode bool) repository.Repository {
+func New() repository.Repository {
 	if dbInstance == nil {
 		// Use lock to prove only create one dbinstance
 		mutex.Lock()
 		if dbInstance == nil {
-			dbInstance = repository.DBConnect(logMode)
+			dbInstance = repository.DBConnect()
 		}
 		mutex.Unlock()
 	}
@@ -56,12 +50,12 @@ type redisConnext struct {
 }
 
 // DB Get database connection
-func DB(logMode bool) *gorm.DB {
+func DB() *gorm.DB {
 	if dbInstance == nil {
 		// Use lock to prove only create one dbinstance
 		mutex.Lock()
 		if dbInstance == nil {
-			dbInstance = repository.DBConnect(logMode)
+			dbInstance = repository.DBConnect()
 		}
 		mutex.Unlock()
 	}
