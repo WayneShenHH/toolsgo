@@ -5,9 +5,9 @@ debug
 debug.test
 toolsgo
 *.csv
-# config/setting.yml
-# config/setting.*.yml
-# !config/setting.default.yml
+config/setting.yml
+config/setting.*.yml
+!config/setting.default.yml
 worker_test_task.go
 service_test.go
 datastore_test.go
