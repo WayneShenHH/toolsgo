@@ -31,6 +31,8 @@ var msgCmd = &cobra.Command{
 			ju.InsertMessage("worker:variant:message", "variant")
 		case "pevt":
 			ju.InsertMessage("worker:pevt:message", "msg_pevt")
+		case "settle":
+			ju.InsertMessage("worker:offersettle:message", "msg_offersettle")
 		}
 	},
 }
