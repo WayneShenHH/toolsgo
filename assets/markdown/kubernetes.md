@@ -25,3 +25,9 @@ $ gcloud container clusters get-credentials fsbs-k8s-1 --zone asia-east1-b --pro
 $ cd /Users/wayneshen/project/sbodds_document/doc-devops/kubernetes
 $ kubectl apply -f dev/libgo.yml
 ```
+
+### kubernetes dashboard
+
+```
+$ kubectl port-forward svc/kubernetes-dashboard 3001:443 -n=kube-system
+```

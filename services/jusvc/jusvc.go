@@ -79,6 +79,18 @@ func (service *JuService) CreateJuMatch(mid uint) {
 	bytes, _ := json.Marshal(message)
 	service.Repository.Rpush("worker:match:message", bytes)
 }
+
+type correctScoreSet struct {
+	Line string
+	Odds float64
+}
+
+func getCorrectScoreSet() []correctScoreSet {
+	bytes := tools.LoadJSON("correct_score_sets")
+	css := []correctScoreSet{}
+	json.Unmarshal(bytes, &css)
+	return css
+}
 func getMsgConfig(mid uint) *models.Message {
 	bytes := tools.LoadJSON("msg_setting")
 	msgSetting := &models.Message{}
@@ -159,7 +171,17 @@ func (service *JuService) CreateTxMatch(mid uint) {
 	if config.OfferTs == 0 {
 		message.OfferTs = timeutil.TimeToStamp(time.Now())
 	}
-	service.MultiInsert(config.Mul, message)
+	css := getCorrectScoreSet()
+	if len(css) > 0 && message.Offer.OtID == 2 {
+		for _, s := range css {
+			message.Offer.Head = s.Line
+			message.Offer.Hodd = s.Odds + 1
+			message.Offer.Aodd = 0.0
+			service.MultiInsert(config.Mul, message)
+		}
+	} else {
+		service.MultiInsert(config.Mul, message)
+	}
 }
 
 //MultiInsert multiple insert messages

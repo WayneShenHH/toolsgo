@@ -15,15 +15,16 @@
         "ot_id": 2,
         "halves_type": "",
         "play_type": "",
-        "h_odd": 66.0,
-        "a_odd": 0,
-        "head": "5up:0",
+        "h_odd": 0.95,
+        "a_odd": 0.93,
+        "d_odd": 0,
+        "head": "4.5",
         "proportion": 0,
         "offer_lineid": 1,
         "is_asians": false,
         "is_otb": false,
         "is_running": false
     },
-    "offer_ts": 5,
+    "offer_ts": 6,
     "Mul": 1
 }

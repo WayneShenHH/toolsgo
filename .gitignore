@@ -12,3 +12,4 @@ worker_test_task.go
 service_test.go
 datastore_test.go
 seed_test.go
+kubedash.yaml
