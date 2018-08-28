@@ -31,3 +31,10 @@ $ kubectl apply -f dev/libgo.yml
 ```
 $ kubectl port-forward svc/kubernetes-dashboard 3001:443 -n=kube-system
 ```
+
+### kubernetes dashboard token
+
+```
+$ kubectl -n kube-system get secret | grep dashboard-token
+$ kubectl -n kube-system describe secret 'chosen secret name from step 1'
+```
