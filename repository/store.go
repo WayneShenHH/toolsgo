@@ -7,7 +7,7 @@ import (
 
 	"github.com/WayneShenHH/toolsgo/app"
 	"github.com/WayneShenHH/toolsgo/module/logger"
-	"github.com/garyburd/redigo/redis"
+	"github.com/gomodule/redigo/redis"
 	"github.com/jinzhu/gorm"
 )
 
