@@ -8,16 +8,17 @@
         "home_score": "",
         "away_score": "",
         "home_redcard": "",
-        "away_redcard": ""
+        "away_redcard": "",
+        "match_live": true
     },
     "offer": {
         "bid": 282,
-        "ot_id": 2,
+        "ot_id": 33,
         "halves_type": "",
         "play_type": "",
-        "h_odd": 0.95,
-        "a_odd": 0.93,
-        "d_odd": 0.0,
+        "h_odd": 0.92,
+        "a_odd": 0.98,
+        "d_odd": 0,
         "head": "-1.5",
         "proportion": 0,
         "offer_lineid": 1,
@@ -25,6 +26,6 @@
         "is_otb": false,
         "is_running": false
     },
-    "offer_ts": 6,
+    "offer_ts": 1537900815691,
     "Mul": 1
 }

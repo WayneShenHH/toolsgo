@@ -140,6 +140,7 @@ func (service *JuService) CreateTxMatch(mid uint) {
 			AteamID:    a2.LeaderID,
 			GroupID:    g2.LeaderID,
 			CategoryID: c2.LeaderID,
+			MatchLive:  config.Match.MatchLive,
 		},
 		Offer: config.Offer,
 		MessageTime: models.MessageTime{

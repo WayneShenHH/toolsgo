@@ -1,11 +1,41 @@
 package timeutil
 
 import (
+	"context"
 	"fmt"
 	"time"
 
 	"github.com/jinzhu/now"
 )
+
+const (
+	key = "localutc"
+	// ServerTimeZone server time zone
+	ServerTimeZone = 0.0
+	// DefaultTimeZone client default time zone
+	DefaultTimeZone = 8.0
+)
+
+// TimeZone local timezone info
+type TimeZone struct {
+	UTC float64
+}
+
+// Setter defines a context that enables setting values.
+type Setter interface {
+	Set(string, interface{})
+}
+
+// FromContext 從 context 中取得身份驗證資訊
+func FromContext(c context.Context) (TimeZone, bool) {
+	t, ok := c.Value(key).(TimeZone)
+	return t, ok
+}
+
+// ToContext 將身份驗證資料傳入 context
+func ToContext(c Setter, data TimeZone) {
+	c.Set(key, data)
+}
 
 // FirstDayOfISOWeek get week day
 func FirstDayOfISOWeek(year int, week int, zone *time.Location) time.Time {

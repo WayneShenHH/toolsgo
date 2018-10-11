@@ -153,12 +153,14 @@ type SwaggerConfig struct {
 
 // HTTPConfig http setting
 type HTTPConfig struct {
-	Addr        string
-	PingAddr    string
-	B2BAddr     string
-	PingB2BAddr string
-	WSAddr      string
-	PingWSAddr  string
+	Addr         string
+	PingAddr     string
+	B2BAddr      string
+	PingB2BAddr  string
+	WSAddr       string
+	PingWSAddr   string
+	BaseURL      string
+	EnableSports []uint
 }
 
 // WebSocketConfig web socket setting

@@ -66,4 +66,19 @@ func Login(ctx *gin.Context) {
 //   required: true
 // responses:
 //   200:
-//     description: 成功訊息
+//     schema:
+//       type: object
+//       properties:
+//         Success:
+//           type: boolean
+//         Code:
+//           type: integer
+//         Data:
+//           type: array
+//           items:
+//              type: object
+//              $ref: "#/definitions/UserLoginResult"
+//         Message:
+//           type: string
+//         Count:
+//           type: integer

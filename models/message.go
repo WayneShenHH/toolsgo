@@ -42,6 +42,7 @@ type SourceMatch struct {
 	OfferIDs       []string `json:"offer_id"`
 	TieResult      bool     `json:"tie_result"`
 	EnableAsianNew bool     `json:"enable_asian_new"`
+	MatchLive      bool     `json:"match_live"`
 
 	//即時比分
 	MatchState  string `json:"match_state"` //1:First Half,2:running,3:Second Half

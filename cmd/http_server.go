@@ -34,7 +34,6 @@ to quickly create a Cobra application.`,
 			http.StartServer(ctx, started)
 		}
 
-		app.Flags = http.ServerFlags
 		go app.Run(os.Args)
 
 		go func() {
