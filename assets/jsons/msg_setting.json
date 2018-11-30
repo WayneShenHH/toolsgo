@@ -13,19 +13,20 @@
     },
     "offer": {
         "bid": 282,
-        "ot_id": 33,
+        "ot_id": 59,
         "halves_type": "",
         "play_type": "",
-        "h_odd": 0.92,
-        "a_odd": 0.98,
+        "h_odd": 0.90,
+        "a_odd": 0.90,
         "d_odd": 0,
-        "head": "-1.5",
+        "head": "-0.5",
         "proportion": 0,
         "offer_lineid": 1,
+        "line_count": 0,
         "is_asians": false,
         "is_otb": false,
         "is_running": false
     },
-    "offer_ts": 1537900815691,
-    "Mul": 1
+    "offer_ts": 1542335205650,
+    "Mul": 2
 }

@@ -78,6 +78,7 @@ type SourceOffer struct {
 	IsAsians    bool    `json:"is_asians"`
 	Proportion  int     `json:"proportion"`
 	OfferLineID uint    `json:"offer_lineid"`
+	LineCount   uint    `json:"line_count"`
 	MessageTime
 }
 

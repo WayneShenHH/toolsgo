@@ -22,8 +22,8 @@ $ gcloud container clusters get-credentials fsbs-k8s-1 --zone asia-east1-b --pro
 ### deploy
 
 ```
-$ cd /Users/wayneshen/project/sbodds_document/doc-devops/kubernetes
-$ kubectl apply -f dev/libgo.yml
+$ cd /Users/wayneshen/project/sbodds_document/doc-devops/kubernetes/fsbs
+$ kubectl apply -f dev/libgo.yaml
 ```
 
 ### kubernetes dashboard

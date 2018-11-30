@@ -180,6 +180,12 @@ func (service *JuService) CreateTxMatch(mid uint) {
 			message.Offer.Aodd = 0.0
 			service.MultiInsert(config.Mul, message)
 		}
+	} else if config.Offer.LineCount > 0 {
+		for i := 0; i < int(config.Offer.LineCount); i++ {
+			message.Offer.Head = fmt.Sprint(i + 1)
+			message.Offer.OfferLineID = uint(i + 1)
+			service.MultiInsert(config.Mul, message)
+		}
 	} else {
 		service.MultiInsert(config.Mul, message)
 	}
