@@ -19,7 +19,9 @@ func (db *datastore) ClearWorkerData() {
 		truncate log_closes;
 		truncate log_operators;
 		truncate log_errors;
-		update matches set available=0, status=2, is_closed=0,is_running=0, available_time = null, auto_enable_time = null, enable=0;`)
+		update matches set available=0, status=2, is_closed=0,is_running=0, available_time = null, auto_enable_time = null, enable=0;
+		update matches set start_time=date_format(date_add(now(),interval 1 day),'%Y-%m-%d 01:30:00'), 
+		account_time=date_format(date_add(now(),interval 1 day),'%Y-%m-%d') where id=1;`)
 }
 func (db *datastore) GetMatchesByTime(start, end time.Time) []entities.Match {
 	matches := []entities.Match{}

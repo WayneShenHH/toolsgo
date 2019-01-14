@@ -123,6 +123,7 @@ type EnvironmentConfig struct {
 	Websocket *WebSocketConfig
 	Swagger   *SwaggerConfig
 	Logger    *LoggerConfig
+	Nsq       *NsqConfig
 }
 
 // DatabaseConfig 資料庫連線設定
@@ -175,6 +176,16 @@ type RedisConfig struct {
 	Index        int
 	MaxIdleConns int
 	MaxConns     int
+}
+
+// NsqConfig nsq 設定
+type NsqConfig struct {
+	NsqdTCP       string //:4150 , producer
+	NsqdHTTP      string //:4151
+	NsqLookupTCP  string //:4160
+	NsqLookupHTTP string //:4161 , consumer
+	Concurrency   int    // consumer concurrency handler count
+	MaxInFlight   int    // 最大可以同時連結的 nsqd 數量
 }
 
 // NotifyConfig 設定通知

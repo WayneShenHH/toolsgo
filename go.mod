@@ -1,11 +1,18 @@
 module github.com/WayneShenHH/toolsgo
 
 require (
+	github.com/DataDog/zstd v1.3.5 // indirect
+	github.com/Shopify/sarama v1.20.0
 	github.com/Sirupsen/logrus v1.0.6
 	github.com/StackExchange/wmi v0.0.0-20180725035823-b12b22c5341f // indirect
 	github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973 // indirect
 	github.com/codegangsta/cli v1.20.0
+	github.com/corpix/uarand v0.0.0 // indirect
 	github.com/deathowl/go-metrics-prometheus v0.0.0-20170731141557-091131e49c33
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/eapache/go-resiliency v1.1.0 // indirect
+	github.com/eapache/go-xerial-snappy v0.0.0-20180814174437-776d5712da21 // indirect
+	github.com/eapache/queue v1.1.0 // indirect
 	github.com/fatih/color v1.7.0
 	github.com/fsnotify/fsnotify v1.4.7 // indirect
 	github.com/gin-contrib/gzip v0.0.0-20180827025821-1c01330167a8
@@ -20,12 +27,14 @@ require (
 	github.com/golang/protobuf v1.2.0 // indirect
 	github.com/golang/snappy v0.0.0-20180518054509-2e65f85255db // indirect
 	github.com/gomodule/redigo v2.0.0+incompatible
+	github.com/google/uuid v1.1.0
 	github.com/gorilla/websocket v1.3.0
 	github.com/hashicorp/consul v1.2.2
 	github.com/hashicorp/go-cleanhttp v0.0.0-20171218145408-d5fe4b57a186 // indirect
 	github.com/hashicorp/go-rootcerts v0.0.0-20160503143440-6bb64b370b90 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/hashicorp/serf v0.8.1 // indirect
+	github.com/icrowley/fake v0.0.0-20180203215853-4178557ae428
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/jinzhu/gorm v1.9.1
 	github.com/jinzhu/inflection v0.0.0-20180308033659-04140366298a // indirect
@@ -41,6 +50,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/nsqio/go-nsq v1.0.7
 	github.com/pelletier/go-toml v1.2.0 // indirect
+	github.com/pierrec/lz4 v2.0.5+incompatible // indirect
 	github.com/prometheus/client_golang v0.8.0
 	github.com/prometheus/client_model v0.0.0-20180712105110-5c3871d89910 // indirect
 	github.com/prometheus/common v0.0.0-20180801064454-c7de2306084e // indirect
@@ -55,6 +65,7 @@ require (
 	github.com/spf13/jwalterweatherman v0.0.0-20180814060501-14d3d4c51834 // indirect
 	github.com/spf13/pflag v1.0.2 // indirect
 	github.com/spf13/viper v1.1.0
+	github.com/stretchr/testify v1.3.0
 	github.com/ugorji/go v1.1.1 // indirect
 	golang.org/x/crypto v0.0.0-20180820150726-614d502a4dac
 	golang.org/x/sys v0.0.0-20180828065106-d99a578cf41b // indirect

@@ -1,8 +1,14 @@
 package cmd
 
 import (
+	"fmt"
 	"strconv"
+	"time"
 
+	"github.com/WayneShenHH/toolsgo/tools/timeutil"
+	"github.com/google/uuid"
+
+	"github.com/WayneShenHH/toolsgo/module/dispatcher"
 	"github.com/WayneShenHH/toolsgo/repository/repositoryimpl"
 	"github.com/WayneShenHH/toolsgo/services/jusvc"
 	"github.com/WayneShenHH/toolsgo/services/txsvc"
@@ -33,8 +39,37 @@ var msgCmd = &cobra.Command{
 			ju.InsertMessage("worker:pevt:message", "msg_pevt")
 		case "settle":
 			ju.InsertMessage("worker:offersettle:message", "msg_offersettle")
+		case "dispatcher":
+
+			d := dispatcher.New(0, 5)
+			d.Start()
+			for i := 0; i < 100; i++ {
+				job := NewTask(uuid.New().String(), timeutil.TimeToStamp(time.Now()))
+				d.Enqueue(job)
+				fmt.Println("i:", i)
+			}
+
+			d.Wait()
 		}
 	},
+}
+
+func NewTask(uuid string, ts int64) dispatcher.Tasker {
+	return &task{
+		UUID: uuid,
+		TS:   ts,
+	}
+}
+
+type task struct {
+	UUID string
+	TS   int64
+}
+
+func (t *task) Run() {
+	// Do something
+	fmt.Println("// Do something", t.TS)
+	time.Sleep(1 * time.Second)
 }
 
 var juCmd = &cobra.Command{

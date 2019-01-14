@@ -1,32 +1,17 @@
-[
-    {
-        "ID": 10,
-        "SportID": 1,
-        "CategoryID": 0,
-        "GroupID": 0,
-        "SetTypeID": 0,
-        "PlayTypeCode": "",
-        "IsRunning": true,
-        "OnceAmountLimit": 5000000,
-        "MatchAmountLimit": 5000000,
-        "MatchSetAmountLimit": 3000000,
-        "OfferAmountLimit": 1000000,
-        "OrderDelay": 0,
-        "RunningOrderDelay": 3,
-        "Juice": 0,
-        "JuiceParlay": 1.02,
-        "JuiceRunning": 0,
-        "JuiceRunningParlay": 1.04,
-        "HomeThreshold": -2000000,
-        "AwayThreshold": -2000000,
-        "DrawThreshold": -2000000,
-        "AutoAvailable": true,
-        "IsAllowRunning": true,
-        "IsAllowParlay": true,
-        "PregameHours": 144,
-        "ForbiddenAsians": false,
-        "BookMakerSequence": "62,81",
-        "BookMakerArbitrage": "62",
-        "IsLiveScore": true
-    }
-]
+{
+    "Amount": 100,
+    "Combination": [],
+    "Items": [
+        {
+            "OfferID": 6074412,
+            "AsianProportion": 0,
+            "Line": 2.75,
+            "HomeScore": null,
+            "AwayScore": null,
+            "Target": 1,
+            "Odds": 0.68
+        }
+    ],
+    "RateMode": 3,
+    "OddsType": 1
+}

@@ -1,9 +1,11 @@
 package cmd
 
 import (
+	"fmt"
 	"strings"
 
-	"github.com/WayneShenHH/toolsgo/services/nsqsvc"
+	"github.com/WayneShenHH/toolsgo/module/mq/nsqsvc"
+
 	"github.com/spf13/cobra"
 )
 
@@ -12,9 +14,13 @@ var nsqCmd = &cobra.Command{
 	Long:  `nsq worker`,
 	Use:   "nsq",
 	Run: func(cmd *cobra.Command, args []string) {
+		mq := nsqsvc.New()
 		topic := args[0]
 		channel := args[1]
-		nsqsvc.NsqConsumeWorker(topic, channel)
+		mq.ConsumeWorker(topic, channel, func(data []byte) error {
+			fmt.Println(string(data))
+			return nil
+		})
 	},
 }
 var nsqProduceCmd = &cobra.Command{
@@ -22,9 +28,10 @@ var nsqProduceCmd = &cobra.Command{
 	Long:  `nsq add message`,
 	Use:   "nsq:msg",
 	Run: func(cmd *cobra.Command, args []string) {
+		mq := nsqsvc.New()
 		topic := args[0]
 		msg := args[1]
-		nsqsvc.NsqProduceMessage(topic, msg)
+		mq.Produce(topic, msg)
 	},
 }
 var nsqAddTopicCmd = &cobra.Command{
@@ -36,18 +43,9 @@ var nsqAddTopicCmd = &cobra.Command{
 		nsqsvc.NsqAddTopic(topics...)
 	},
 }
-var nsqGetTopicCmd = &cobra.Command{
-	Short: "nsq get topic cmd",
-	Long:  `nsq get topic`,
-	Use:   "topic:all",
-	Run: func(cmd *cobra.Command, args []string) {
-		nsqsvc.NsqGetTopics()
-	},
-}
 
 func init() {
 	RootCmd.AddCommand(nsqCmd)
 	RootCmd.AddCommand(nsqAddTopicCmd)
 	RootCmd.AddCommand(nsqProduceCmd)
-	RootCmd.AddCommand(nsqGetTopicCmd)
 }
