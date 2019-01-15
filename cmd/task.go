@@ -41,12 +41,12 @@ var msgCmd = &cobra.Command{
 			ju.InsertMessage("worker:offersettle:message", "msg_offersettle")
 		case "dispatcher":
 
-			d := dispatcher.New(0, 5)
+			d := dispatcher.New(3, 5)
 			d.Start()
 			for i := 0; i < 100; i++ {
 				job := NewTask(uuid.New().String(), timeutil.TimeToStamp(time.Now()))
 				d.Enqueue(job)
-				fmt.Println("i:", i)
+				d.Enqueue(&task2{})
 			}
 
 			d.Wait()
@@ -65,7 +65,12 @@ type task struct {
 	UUID string
 	TS   int64
 }
+type task2 struct {
+}
 
+func (t *task2) Run() {
+	fmt.Println("// task2 Do something")
+}
 func (t *task) Run() {
 	// Do something
 	fmt.Println("// Do something", t.TS)
