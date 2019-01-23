@@ -75,7 +75,6 @@ eval "$(rbenv init -)"
 export PATH="/usr/local/mysql/bin:$PATH"
 export GOROOT="/usr/local/go"
 export GOPATH="$HOME/go"
-#export GOROOT="/usr/local/go"
 #source "/Users/wayneshen/.gvm/scripts/gvm"
 #gvm use go1.9.2
 export PATH="$GOPATH/bin:$PATH"
@@ -87,7 +86,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
-
+GO111MODULE=auto
 alias aws:fe="ssh ubuntu@admin168.cow.bet" #production-operator-F2E
 alias aws:runner="ssh ubuntu@gitlab-runner.cow.bet" #ci/cd
 alias aws:w1="ssh ubuntu@w1.cow.bet" #staging-api
@@ -95,23 +94,30 @@ alias aws:w2="ssh ubuntu@w2.cow.bet" #production-api
 alias aws:spider="ssh ubuntu@spider.cow.bet" #production-spider
 alias aws:redis="ssh -f -N -L6979:afu.ze67a8.0001.apne1.cache.amazonaws.com:6379 ubuntu@w2.cow.bet"
 
-alias sb:player="cd ~/project/afu_frontend_user"
-alias sb:operator="cd ~/project/afu_frontend"
-alias sb:red="cd ~/project/afu_oddservices/"
-alias sb:doc="cd /Users/wayneshen/project/sbodds_document/sbodds_document.wiki"
-
-alias libgo="cd ~/go/src/gitlab.cow.bet/bkd_tool/libgo/"
-alias scorego="cd ~/go/src/gitlab.cow.bet/bkd_tool/scorego/"
-alias waynego="cd ~/go/src/github.com/WayneShenHH/toolsgo"
-alias spidergo="cd ~/go/src/gitlab.cow.bet/bkd_tool/spidergo"
-
-alias c:waynego="code ~/go/src/github.com/WayneShenHH/toolsgo"
-alias c:libgo="code ~/go/src/gitlab.cow.bet/bkd_tool/libgo/"
-alias c:spidergo="code ~/go/src/gitlab.cow.bet/bkd_tool/spidergo/"
-
 alias zsh="source ~/.zshrc"
 alias c:zsh="code ~/.zshrc"
+alias gcpredis="gcloud compute ssh  network-forwarder -- -N -L 6386:10.0.0.11:6379"
+alias gcpredis2="gcloud compute ssh  network-forwarder -- -N -L 6387:10.0.0.35:6379"
+alias gcpredis3="gcloud compute ssh  network-forwarder -- -N -L 6388:10.0.0.43:6379"
+alias gcpsql="gcloud compute ssh  network-forwarder -- -N -L 3307:10.63.16.3:3306"
+alias gcpsql2="gcloud compute ssh  network-forwarder -- -N -L 3308:10.63.16.5:3306"
+alias gcpsql3="gcloud compute ssh  network-forwarder -- -N -L 3309:10.63.16.7:3306"
+alias gcplog="kubectl port-forward svc/kibana 5601:443 -n=logging"
+alias nsqlook="nsqlookupd"
+alias nsq="nsqd --lookupd-tcp-address=127.0.0.1:4160"
+alias nsqui="nsqadmin --lookupd-http-address=127.0.0.1:4161"
+alias lint="golint -set_exit_status=1 $(go list ./... | grep -v /vendor/)"
+alias libgomock="mockgen -source=./store/store.go -destination=./store/mock/store.go"
 
+function kubeapply(){
+  kubectl apply -f /Users/wayne/projects/doc-devops/kubernetes/fsbs/$1/libgo.yaml
+}
+function zsh(){
+  source ~/.zshrc
+}
+function nsqlog(){
+  nsq_to_file --topic=$1 --output-dir=/tmp --lookupd-http-address=127.0.0.1:4161
+}
 function testsvc(){
     go test -v gitlab.cow.bet/bkd_tool/libgo/services -run ^$1$
 }
@@ -123,6 +129,9 @@ function buildw(){
 }
 function build(){
     cd /Users/wayneshen/go/src/gitlab.cow.bet/bkd_tool/libgo && go build -o ~/go/bin/libgo
+}
+function builds(){
+  GO111MODULE=off swagger generate spec -o ~/go/bin/swagger.json
 }
 function run(){
     /Users/wayneshen/go/bin/libgo $1
