@@ -106,7 +106,6 @@ alias gcplog="kubectl port-forward svc/kibana 5601:443 -n=logging"
 alias nsqlook="nsqlookupd"
 alias nsq="nsqd --lookupd-tcp-address=127.0.0.1:4160"
 alias nsqui="nsqadmin --lookupd-http-address=127.0.0.1:4161"
-alias lint="golint -set_exit_status=1 $(go list ./... | grep -v /vendor/)"
 alias libgomock="mockgen -source=./store/store.go -destination=./store/mock/store.go"
 
 function kubeapply(){
@@ -121,6 +120,9 @@ function nsqlog(){
 function testsvc(){
     go test -v gitlab.cow.bet/bkd_tool/libgo/services -run ^$1$
 }
+function testcover(){
+    go test -cover $(go list ./... | grep -v /vendor/)
+}
 function testdata(){
     go test -v gitlab.cow.bet/bkd_tool/libgo/store/datastore -run ^$1$
 }
@@ -132,6 +134,15 @@ function build(){
 }
 function builds(){
   GO111MODULE=off swagger generate spec -o ~/go/bin/swagger.json
+}
+function sqldump(){
+  mysqldump --user=libgo --host=127.0.0.1 --port=3307 --set-gtid-purged=OFF --password="z*GD0R^YrMpl^n$" sbodds $1 $2 $3 $4 > "dump$(date +"%Y%m%d").sql"
+}
+function sqlimport(){
+    mysql --protocol=tcp --host=127.0.0.1 --user=root --port=3306 --password="123456" --default-character-set=utf8 --comments --database=sbodds  < $1
+}
+function golintck(){
+  golint -set_exit_status=1 $(go list ./... | grep -v /vendor/)
 }
 function run(){
     /Users/wayneshen/go/bin/libgo $1
