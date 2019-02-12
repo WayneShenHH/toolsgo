@@ -111,6 +111,9 @@ alias libgomock="mockgen -source=./store/store.go -destination=./store/mock/stor
 function kubeapply(){
   kubectl apply -f /Users/wayne/projects/doc-devops/kubernetes/fsbs/$1/libgo.yaml
 }
+function kubedel(){
+    kubectl delete pods -n=$1 $2
+}
 function zsh(){
   source ~/.zshrc
 }
@@ -150,6 +153,9 @@ function run(){
 function server(){
     /Users/wayneshen/go/bin/libgo http:server
 }
+alias odds="redis-cli -p 6386 hget odds:$1 $2_$3"
+alias odds2="redis-cli -p 6387 hget odds:$1 $2_$3"
+alias odds3="redis-cli -p 6388 hget odds:$1 $2_$3"
 function w(){
     /Users/wayneshen/go/bin/libgo worker:$1 $2
 }

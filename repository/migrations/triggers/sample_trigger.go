@@ -1,7 +1,7 @@
 package triggers
 
-//UpdateMatchSetOffer 當控盤透過ＡＰＩ調整賠率時，新增一筆操作記錄
-const UpdateMatchSetOffer = `
+//SampleTrigger 當控盤透過ＡＰＩ調整賠率時，新增一筆操作記錄
+var SampleTrigger = `
 DROP TRIGGER IF EXISTS update_match_set_offers;
 CREATE TRIGGER update_match_set_offers AFTER UPDATE ON match_set_offers
 FOR EACH ROW

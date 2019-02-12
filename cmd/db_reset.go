@@ -34,7 +34,8 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(cmd.Short)
 		fmt.Println(cmd.Long)
-		err := migrations.Migrate()
+		err := migrations.DeleteAll()
+		err = migrations.Migrate()
 		seed.Seed()
 		fmt.Println("dbReset called")
 		if err != nil {
@@ -44,8 +45,21 @@ to quickly create a Cobra application.`,
 	},
 }
 
+// dbMigrateCmd represents the dbMigrate command
+var dbMigrateCmd = &cobra.Command{
+	Use:   "db:migrate",
+	Short: "database migrate",
+	Run: func(cmd *cobra.Command, args []string) {
+		err := migrations.Migrate()
+		if err != nil {
+			fmt.Println("error : " + err.Error())
+		}
+	},
+}
+
 func init() {
 	RootCmd.AddCommand(dbResetCmd)
+	RootCmd.AddCommand(dbMigrateCmd)
 
 	// Here you will define your flags and configuration settings.
 

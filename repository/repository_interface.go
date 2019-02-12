@@ -28,4 +28,5 @@ type Repository interface {
 	TxMessage(mid uint) []models.TxMessage
 	GetOldData() *[]models.OfferHierarchy
 	ClearOldData()
+	ClockIn()
 }
