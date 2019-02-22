@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/WayneShenHH/toolsgo/repository/migrations/dbmodify"
+
 	"github.com/WayneShenHH/toolsgo/repository/migrations/dbviews"
 
 	gormigrate "github.com/go-gormigrate/gormigrate"
@@ -32,10 +34,7 @@ func Migrate() error {
 		log.Fatalf("DropAllTable failed: %v", err)
 		return err
 	}
-	m := gormigrate.New(db, gormigrate.DefaultOptions, []*gormigrate.Migration{
-		// create persons table
-		&initTable,
-	})
+	m := gormigrate.New(db, gormigrate.DefaultOptions, dbmodify.Init())
 
 	if err = m.Migrate(); err != nil {
 		log.Fatalf("Could not migrate: %v", err)

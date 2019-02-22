@@ -1,1 +1,1 @@
-9664947,9728829,9759239,5346,1067445,35485,35919,32016453,21045187,21045171,21045551
+SELECT \* FROM "orders" WHERE "orders"."deleted_at" IS NULL AND \(\(player_id = \?\) AND \(status=\?\) AND \(settle=1\) AND \(account_time >= \?\) AND \(account_time <= \?\)\) ORDER BY id DESC LIMIT 100 OFFSET 100

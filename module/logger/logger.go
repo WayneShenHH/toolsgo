@@ -5,9 +5,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/WayneShenHH/toolsgo/app"
 	"github.com/fatih/color"
+	"github.com/sirupsen/logrus"
 )
 
 // std represents the logger which outputs to the stdout.

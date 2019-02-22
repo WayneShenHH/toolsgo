@@ -17,7 +17,7 @@ var showConfig = &cobra.Command{
 		d, _ := yaml.Marshal(&app.Setting)
 
 		fmt.Printf("--- m dump:\n%s\n\n", string(d))
-	},
+	}, 
 }
 
 func init() {
