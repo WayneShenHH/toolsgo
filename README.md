@@ -42,3 +42,16 @@ $ /path-to-nsq-bin/nsqadmin --lookupd-http-address=127.0.0.1:4161
 ```
 $ /path-to-nsq-bin/nsq_to_file --topic=<topic-name> --output-dir=/tmp --lookupd-http-address=127.0.0.1:4161
 ```
+
+## start gRPC services
+
+1. install package
+```
+download plugin: https://github.com/protocolbuffers/protobuf/releases
+$ go get github.com/golang/protobuf@master
+```
+
+2. generate *.pb.go
+```
+protoc ./pb/*.proto --go_out=plugins=grpc:.
+```

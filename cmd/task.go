@@ -54,6 +54,7 @@ var msgCmd = &cobra.Command{
 	},
 }
 
+// NewTask new
 func NewTask(uuid string, ts int64) dispatcher.Tasker {
 	return &task{
 		UUID: uuid,

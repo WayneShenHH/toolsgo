@@ -102,6 +102,7 @@ alias gcpredis3="gcloud compute ssh  network-forwarder -- -N -L 6388:10.0.0.43:6
 alias gcpsql="gcloud compute ssh  network-forwarder -- -N -L 3307:10.63.16.3:3306"
 alias gcpsql2="gcloud compute ssh  network-forwarder -- -N -L 3308:10.63.16.5:3306"
 alias gcpsql3="gcloud compute ssh  network-forwarder -- -N -L 3309:10.63.16.7:3306"
+alias gcpsql98="gcloud compute ssh fsbs-forwarder --zone asia-east1-b -- -N -L 127.0.0.1:3396:10.227.208.7:3306"
 alias gcplog="kubectl port-forward svc/kibana 5601:443 -n=logging"
 alias nsqlook="nsqlookupd"
 alias nsq="nsqd --lookupd-tcp-address=127.0.0.1:4160"

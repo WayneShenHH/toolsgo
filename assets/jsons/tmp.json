@@ -1,17 +1,1 @@
-{
-    "Amount": 100,
-    "Combination": [],
-    "Items": [
-        {
-            "OfferID": 6074412,
-            "AsianProportion": 0,
-            "Line": 2.75,
-            "HomeScore": null,
-            "AwayScore": null,
-            "Target": 1,
-            "Odds": 0.68
-        }
-    ],
-    "RateMode": 3,
-    "OddsType": 1
-}
+[{"MatchID":3000,"OfferTypeID":101001,"SettleTypeID":1,"Remark":"{\"HomeScore\":2,\"AwayScore\":1,\"HomeTeamHT\":null,\"AwayTeamHT\":null}","Assertions":[{"Assertion":-1,"Conditions":[{"Mode":2,"Result":2},{"Mode":1,"Result":1},{"Mode":3,"Result":3}]}],"IsForce":true,"IsRefund":false},{"MatchID":3000,"OfferTypeID":101002,"SettleTypeID":1,"Remark":"{\"HomeScore\":2,\"AwayScore\":1,\"HomeTeamHT\":null,\"AwayTeamHT\":null}","Assertions":[{"Assertion":3,"Conditions":[{"Mode":2,"Result":3},{"Mode":1,"Result":1},{"Mode":3,"Result":2}]}],"IsForce":true,"IsRefund":false},{"MatchID":3000,"OfferTypeID":201003,"SettleTypeID":1,"Remark":"{\"HomeScore\":2,\"AwayScore\":1,\"HomeTeamHT\":null,\"AwayTeamHT\":null}","Assertions":[{"Assertion":-1,"Conditions":[{"Mode":2,"Result":2},{"Mode":1,"Result":1},{"Mode":3,"Result":3}]}],"IsForce":true,"IsRefund":false},{"MatchID":3000,"OfferTypeID":201005,"SettleTypeID":3,"Remark":"{\"HomeScore\":2,\"AwayScore\":1,\"HomeTeamHT\":null,\"AwayTeamHT\":null}","Assertions":[{"Assertion":-1,"Conditions":[{"Mode":2,"Result":2},{"Mode":1,"Result":1},{"Mode":3,"Result":3}]}],"IsForce":true,"IsRefund":false},{"MatchID":3000,"OfferTypeID":201006,"SettleTypeID":1,"Remark":"{\"HomeScore\":2,\"AwayScore\":1,\"HomeTeamHT\":null,\"AwayTeamHT\":null}","Assertions":[{"Assertion":0,"Conditions":[{"Mode":1,"Result":2},{"Mode":4,"Result":0}]}],"IsForce":true,"IsRefund":false},{"MatchID":3000,"OfferTypeID":201007,"SettleTypeID":2,"Remark":"{\"HomeScore\":2,\"AwayScore\":1,\"HomeTeamHT\":null,\"AwayTeamHT\":null}","Assertions":[{"Assertion":200010,"Conditions":[{"Mode":1,"Result":2},{"Mode":4,"Result":3}]}],"IsForce":true,"IsRefund":false}]

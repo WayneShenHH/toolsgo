@@ -4,16 +4,16 @@
         "match_state": "",
         "state_str": "",
         "gametime": "",
-        "minute": "",
-        "home_score": "",
-        "away_score": "",
+        "minute": "33",
+        "home_score": "1",
+        "away_score": "2",
         "home_redcard": "",
         "away_redcard": "",
         "match_live": true
     },
     "offer": {
         "bid": 282,
-        "ot_id": 59,
+        "ot_id": 42,
         "halves_type": "",
         "play_type": "",
         "h_odd": 0.90,
@@ -25,7 +25,7 @@
         "line_count": 0,
         "is_asians": false,
         "is_otb": false,
-        "is_running": false
+        "is_running": true
     },
     "offer_ts": 1542335205650,
     "Mul": 1

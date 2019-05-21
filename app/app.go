@@ -124,6 +124,7 @@ type EnvironmentConfig struct {
 	Swagger   *SwaggerConfig
 	Logger    *LoggerConfig
 	Nsq       *NsqConfig
+	GRPC      *GRPCConfig
 }
 
 // DatabaseConfig 資料庫連線設定
@@ -186,6 +187,12 @@ type NsqConfig struct {
 	NsqLookupHTTP string //:4161 , consumer
 	Concurrency   int    // consumer concurrency handler count
 	MaxInFlight   int    // 最大可以同時連結的 nsqd 數量
+}
+
+// GRPCConfig config
+type GRPCConfig struct {
+	Server string
+	MLMAPI string
 }
 
 // NotifyConfig 設定通知

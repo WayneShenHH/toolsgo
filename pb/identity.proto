@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package pb;
+
+service Identity {
+    rpc Login(LoginRequest) returns (LoginResponse);
+}
+
+message LoginRequest {
+    string Username = 1;
+    string Password = 2;
+    string IP       = 3;
+}
+
+message LoginResponse {
+    string Token = 1;
+    uint32 Kind  = 2;
+}
