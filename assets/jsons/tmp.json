@@ -1,1 +1,75 @@
-[{"MatchID":3000,"OfferTypeID":101001,"SettleTypeID":1,"Remark":"{\"HomeScore\":2,\"AwayScore\":1,\"HomeTeamHT\":null,\"AwayTeamHT\":null}","Assertions":[{"Assertion":-1,"Conditions":[{"Mode":2,"Result":2},{"Mode":1,"Result":1},{"Mode":3,"Result":3}]}],"IsForce":true,"IsRefund":false},{"MatchID":3000,"OfferTypeID":101002,"SettleTypeID":1,"Remark":"{\"HomeScore\":2,\"AwayScore\":1,\"HomeTeamHT\":null,\"AwayTeamHT\":null}","Assertions":[{"Assertion":3,"Conditions":[{"Mode":2,"Result":3},{"Mode":1,"Result":1},{"Mode":3,"Result":2}]}],"IsForce":true,"IsRefund":false},{"MatchID":3000,"OfferTypeID":201003,"SettleTypeID":1,"Remark":"{\"HomeScore\":2,\"AwayScore\":1,\"HomeTeamHT\":null,\"AwayTeamHT\":null}","Assertions":[{"Assertion":-1,"Conditions":[{"Mode":2,"Result":2},{"Mode":1,"Result":1},{"Mode":3,"Result":3}]}],"IsForce":true,"IsRefund":false},{"MatchID":3000,"OfferTypeID":201005,"SettleTypeID":3,"Remark":"{\"HomeScore\":2,\"AwayScore\":1,\"HomeTeamHT\":null,\"AwayTeamHT\":null}","Assertions":[{"Assertion":-1,"Conditions":[{"Mode":2,"Result":2},{"Mode":1,"Result":1},{"Mode":3,"Result":3}]}],"IsForce":true,"IsRefund":false},{"MatchID":3000,"OfferTypeID":201006,"SettleTypeID":1,"Remark":"{\"HomeScore\":2,\"AwayScore\":1,\"HomeTeamHT\":null,\"AwayTeamHT\":null}","Assertions":[{"Assertion":0,"Conditions":[{"Mode":1,"Result":2},{"Mode":4,"Result":0}]}],"IsForce":true,"IsRefund":false},{"MatchID":3000,"OfferTypeID":201007,"SettleTypeID":2,"Remark":"{\"HomeScore\":2,\"AwayScore\":1,\"HomeTeamHT\":null,\"AwayTeamHT\":null}","Assertions":[{"Assertion":200010,"Conditions":[{"Mode":1,"Result":2},{"Mode":4,"Result":3}]}],"IsForce":true,"IsRefund":false}]
+{
+    "Success": true,
+    "Code": 0,
+    "Data": {
+        "ID": 887316,
+        "OrderAt": "2019-06-15T17:52:36.039736+08:00",
+        "AccountTime": "2019-06-16T00:00:00Z",
+        "SerialNumber": "TH0000887316",
+        "Amount": 100,
+        "Prize": 77,
+        "PL": 0,
+        "ErrorCode": 5202,
+        "Settle": false,
+        "Status": 2,
+        "ResultFlag": 0,
+        "OddsType": 1,
+        "Items": [
+            {
+                "SportID": 1,
+                "ID": 878181,
+                "OtID": 201005,
+                "MatchStartTime": "2019-06-15T08:19:00Z",
+                "Odds": 0.77,
+                "Line": 0,
+                "Proportion": 0,
+                "HomeScore": 1,
+                "AwayScore": 2,
+                "FinalSetHomeScore": null,
+                "FinalSetAwayScore": null,
+                "SettleRemark": null,
+                "League": {
+                    "Name": "Queensland Premier League",
+                    "NameTW": "澳大利亞昆士蘭州超級聯賽",
+                    "NameCN": "澳大利亚昆士兰州超级联赛",
+                    "NameEN": "Australia Queensland Premier League",
+                    "NameJP": "FBAUS Queensland Premier League",
+                    "NameTZ": "FBAUS Queensland Premier League"
+                },
+                "Group": {
+                    "Name": "FBAUS Queensland Premier League > Regular Season-19",
+                    "NameTW": "FBAUS Queensland Premier League > Regular Season",
+                    "NameCN": "FBAUS Queensland Premier League > Regular Season",
+                    "NameEN": "FBAUS Queensland Premier League > Regular Season",
+                    "NameJP": "FBAUS Queensland Premier League > Regular Season",
+                    "NameTZ": "FBAUS Queensland Premier League > Regular Season"
+                },
+                "HomeTeam": {
+                    "Name": "Mitchelton",
+                    "NameTW": "米切爾頓",
+                    "NameCN": "米切尔顿",
+                    "NameEN": "Mitchelton",
+                    "NameJP": "Mitchelton",
+                    "NameTZ": "Mitchelton"
+                },
+                "AwayTeam": {
+                    "Name": "WDSC Wolves",
+                    "NameTW": "溫納姆狼隊",
+                    "NameCN": "温纳姆狼队",
+                    "NameEN": "WDSC Wolves",
+                    "NameJP": "WDSCオオカミ",
+                    "NameTZ": "WDSC Wolves"
+                },
+                "OutrightTeam": null,
+                "Target": 2,
+                "ResultCode": 0,
+                "IsRunning": true,
+                "IsLiveScore": false,
+                "IsMiddleGround": false,
+                "MarketTypeID": 0
+            }
+        ]
+    },
+    "Message": "",
+    "Count": 0
+}

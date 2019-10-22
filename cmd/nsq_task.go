@@ -1,10 +1,13 @@
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 
+	"github.com/WayneShenHH/toolsgo/models"
 	"github.com/WayneShenHH/toolsgo/module/mq/nsqsvc"
+	"github.com/WayneShenHH/toolsgo/tools"
 
 	"github.com/spf13/cobra"
 )
@@ -30,7 +33,11 @@ var nsqProduceCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		mq := nsqsvc.New()
 		topic := args[0]
-		msg := args[1]
+		jsonfile := args[1]
+		bytes := tools.LoadJSON(jsonfile)
+
+		msg := models.Message{}
+		json.Unmarshal(bytes, &msg)
 		mq.Produce(topic, msg)
 	},
 }
