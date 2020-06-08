@@ -17,7 +17,12 @@ var timestampCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(cmd.Short)
 		fmt.Println(cmd.Long)
+
 		time := timeutil.StampToTime(ts)
+
+		if time.Year() < 2000 {
+			time = timeutil.StampToTime(ts * 1000)
+		}
 		fmt.Println(time)
 	},
 }
